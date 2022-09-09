@@ -1,0 +1,520 @@
+{% liquid
+
+ assign show_top_cate = section.settings.show_top_cate
+
+%}
+{% if show_top_cate  %}
+<div class="top_categories">
+  <div class="container">
+  <div class="row">
+    <div class="col topcate flex h_center v_middle">
+  <input type="hidden" value="{{collection.handle}}" name="currency-collection-handle" id="currency_collection_handle"/>
+  {% assign index = 0 %}
+  {%- for block in section.blocks -%}    
+    {%- case block.type -%}
+  
+  		{%- when 'title' -%}
+          {%- if template contains 'page' -%}
+          {% assign name = page.title%}
+          {%- elsif template contains 'product' -%}
+          {%- if collection.url -%}
+          {% assign name = collection.title %}              		
+          {%- endif -%}             
+          {%- elsif template contains 'collection' and collection.handle -%}
+          {% assign name = collection.title%} 
+          {%- elsif template == 'blog' -%}
+          {% assign name = blog.title%}               
+          {%- elsif template == 'article' -%}              
+          {% assign name = article.title%}       
+          {%- else -%}
+          {% assign name = template%}  
+          {% if name contains '/' %}
+          {% assign arr = name | split: '/' | last %}
+          {% assign name =  arr %}
+          {% endif %}
+          {%- endif -%}
+    	 <div class="title">
+          <h1> {{ name }} </h1>
+  		</div>
+      	{%style%}
+        .collection_top_categories .top_categories .title h1{
+          font-size:{{block.settings.font_s}}px;
+          font-weight:{{block.settings.font_w}};
+          text-transform:{{block.settings.text_transform}};
+          color: {{block.settings.cl_text}};
+          margin-bottom:{{block.settings.mg_bottom}}px;
+        }
+        @media (max-width: 1024px) {
+          	.collection_top_categories .top_categories .title h1{
+              font-size:{{block.settings.font_s_mobile}}px;
+              font-weight:{{block.settings.font_w_mobile}};
+              margin-bottom:{{block.settings.mg_bottom_mobile}}px;
+              }
+        }
+      	{%endstyle%}
+      {%- when 'filters' -%}
+          {%- case block.settings.type -%}
+              {%- when 'tags' -%}
+               
+                {%- assign input_name = 'filter_by_tag' -%}
+                {%- assign current_type_filters = filter_by_tags -%}
+                {%- assign all_items = collection.all_tags -%}
+              {%- when 'vendors' -%}
+                
+                {% capture input_name %}filter_by_vendor{% endcapture %}
+                {%- assign current_type_filters = filter_by_vendors -%}
+                {%- assign all_items = collection.all_vendors -%}
+              {%- when 'types' -%}
+               
+                {% capture input_name %}filter_by_type{% endcapture %}
+                {%- assign current_type_filters = filter_by_types -%}
+                {%- assign all_items = collection.all_types -%}
+          {%- endcase -%}
+          {%- if collection.current_vendor or collection.current_type -%}
+          		{%- continue -%}
+          {%- endif -%}
+          {%- assign all_items_handle = all_items | join: '___' | handleize | split: '___' -%}
+  
+          {%- capture navigation_content -%}
+         
+              {%- if block.settings.items contains '|' -%}
+                {%- assign filters = block.settings.items | split: '|' -%}
+              {%- else -%}
+                {%- assign filters = block.settings.items | split: ',' -%}
+              {%- endif -%}
+
+              {%- assign filter_index = filter_index | plus: 1 -%}
+           
+              <div id="se_{{block.id}}" class="collection-filters {% if block.settings.type == 'colors' %} color {% endif %} {% if block.settings.type == 'size' %} size {% endif %}" data-item="{{all_items}}"  data-filter="{{filters}}" data-current="{{current_tags}}" data-js-collection-filters{% if block.settings.type == 'colors' %} data-property="color"{% endif %}>
+                  {%- capture filters_html -%}
+                    {%- assign filters_count = 0 -%}
+                    {%- for filter in filters -%}
+                      {%- assign filter_handle = filter | handleize -%}
+                      {%- if all_items contains filter and collection.all_tags contains filter-%}                  		
+                            {%- assign current_filter_handle = filter | handleize -%}
+                            <div class="input-checkbox {% if block.settings.type == 'colors' %} input-checkbox--unbordered{% endif %}">
+                              <input type="checkbox" class="d-none" name="{{ input_name }}" value="{{ filter_handle }}"{% if current_type_filters contains current_filter_handle %} checked="checked"{% endif %}>
+
+                              {%- if block.settings.type != 'colors' -%}   
+                                {% if current_tags contains filter %}
+                                    {%- capture filter_html -%}
+                                    <span class="title_filter">
+                                        {{filter}}
+                                    </span>
+                                    {%- endcapture -%}
+                                    {{filter_html | link_to_remove_tag:filter | replace: 'title=', 'class="js_ajax_filter active" title=' }}
+                                {% else %}
+                                    {%- capture filter_html -%}
+                                    <span class="title_filter">
+                                        {{filter}}
+                                    </span>
+                                    {%- endcapture -%}
+                                    {{filter_html  | link_to_add_tag:filter | replace: 'title=', 'class="js_ajax_filter" title='}}
+                                {% endif%}
+                              {% else %}                            
+                                    {%- capture color_button -%}
+                                      <label {% if current_tags contains filter %} {% assign color_border = filter | downcase %} style="border-color:{% if color_border != "white" %}{{filter}}{% else %} #343e45 {% endif %}" {% endif %}>
+                                        <span class="{% if filter == 'White' %}laber_white{%endif%}{% if block.settings.type == 'colors' %} rounded-circle {% endif %} "{% if block.settings.type == 'colors' %} style="background-color:{{filter|strip  | downcase}}" {% endif %} >
+                                        </span>
+                                         <span class="lbl_color">{{filter}}</span>
+                                      </label>
+                                    {%- endcapture -%}
+                                    {% if current_tags contains filter %}                                
+                                        {{color_button | link_to_remove_tag:filter | replace: 'title=', 'class="js_ajax_filter active" title=' }}
+                                    {% else %}                                
+                                        {{color_button | link_to_add_tag:filter | replace: 'title=', 'class="js_ajax_filter" title='}}
+                                    {% endif%}
+                              {%- endif -%}
+                            </div>
+                            {%- assign has_content = true -%}                        
+                        {%- endif -%}
+                    {%- endfor -%}
+             {%- endcapture -%}
+             
+             {{ filters_html }}
+                {%style%}
+                  .top_categories #se_{{block.id}}.collection-filters .input-checkbox a {
+                  border: 1px solid {{block.settings.br_text}};
+                  color: {{block.settings.cl_text}};
+                  background-color: {{block.settings.bg_text}};
+                  }
+                  .top_categories #se_{{block.id}}.collection-filters .input-checkbox a.active, 
+                  .top_categories #se_{{block.id}}.collection-filters .input-checkbox a:hover {
+                  border-color:{{block.settings.br_text_hover}};
+                  color: {{block.settings.cl_text_hover}};
+                  background-color: {{block.settings.bg_text_hover}};
+                  }
+                {%endstyle%}
+          </div>
+      {%- endcapture -%}  
+
+      {%- endcase -%}
+  
+  
+      {%- if navigation_content -%}
+
+          <div class="layer-navigation {% if block.type == "filters" %} layer-navigation__filter {% endif %}" data-js-collection-nav-section="{{ block.type }}"{{ accordion_attr }}>
+            <div class="layer-navigation__accordion "{{ accordion_content_attr }}>
+              <div class="layer-navigation__content">
+                {%- capture section_result_html -%}
+                    {%- if has_content -%}
+                        {{ navigation_content }}
+                    {%- endif -%}
+                {%- endcapture -%}
+                
+                		{{ section_result_html }}
+              
+              </div>
+            </div>
+            
+          </div>
+          {%- assign navigation_content = null -%}
+          {%- assign has_content = null -%}
+        
+                   
+      {%- endif -%}
+  {%- endfor -%}
+    </div>
+    </div>
+  </div>
+</div>
+{% style%}
+	.collection_top_categories .top_categories{
+		margin-top:{{section.settings.mg_top}}px;
+        margin-bottom:{{section.settings.mg_bottom}}px;
+        padding-top:{{section.settings.pd_top}}px;
+		padding-bottom:{{section.settings.pd_bottom}}px;
+		background-color: {{section.settings.cl_bg}};
+	}
+
+    @media (max-width: 1024px) {
+      .collection_top_categories .top_categories{
+          margin-top:{{section.settings.mobile_mg_top}}px;
+          margin-bottom:{{section.settings.mobile_mg_bottom}}px;
+          padding-top:{{section.settings.mobile_pd_top}}px;
+          padding-bottom:{{section.settings.mobile_pd_bottom}}px;
+      }
+    }
+{% endstyle%}
+
+{%endif%}
+{% schema %}
+  {
+    "name": "Top Categories",
+	"class":"collection_top_categories",
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "show_top_cate",
+    "label": "Show Top Categories",
+    "default": true
+    },
+	{
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+	  {
+        "type": "header",
+        "content": "== Margin",
+		"info":"Margin top, Margin bottom. If you not use to blank"
+      },
+      {
+        "type": "range",
+        "id": "mg_top",
+        "label": "Margin top",
+        "default": 30,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_bottom",
+        "label": "Margin bottom",
+        "default": 30,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+	  {
+        "type": "header",
+        "content": "== padding",
+		"info":"padding top, padding bottom. If you not use to blank"
+      },
+      {
+        "type": "range",
+        "id": "pd_top",
+        "label": "padding top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "pd_bottom",
+        "label": "padding bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+	  {
+        "type": "header",
+        "content": "== Setting mobile",
+		"info":"Padding and Margin"
+      },
+	 {
+        "type": "range",
+        "id": "mobile_mg_top",
+        "label": "Margin top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mobile_mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+	  {
+        "type": "range",
+        "id": "mobile_pd_top",
+        "label": "Padding top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mobile_pd_bottom",
+        "label": "Padding bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      }		
+	],
+	"blocks": [
+        {
+        "type": "title",
+        "name": "Title",
+        "limit": 1,
+		"settings": [
+          {
+          "type": "range",
+          "id": "font_s",
+          "label": "Font size",
+          "default": 48,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+          },
+		  {
+          "type": "range",
+          "id": "font_w",
+          "label": "Font weight",
+          "default": 600,
+          "min": 100,
+          "max": 800,
+          "step": 100
+          },	
+          {
+          "type": "color",
+          "id": "cl_text",
+          "label": "Background color",
+          "default": "#0a2748"
+          },
+          {
+          "type": "select",
+          "id": "text_transform",
+          "default": "none",
+          "options": [
+          {
+          "value": "none",
+          "label": "None"
+          },
+          {
+          "value": "capitalize",
+          "label": "Capitalize"
+          },
+          {
+          "value": "lowercase",
+          "label": "Lowercase"
+          },
+          {
+          "value": "uppercase",
+          "label": "Uppercase"
+          }
+          ],
+          "label": "Text transform:"
+          },
+          {
+          "type": "range",
+          "id": "mg_bottom",
+          "label": "Margin bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+          },
+          {
+          "type": "header",
+          "content": "== Setting mobile",
+          "info":"Padding and Margin"
+          },
+		  {
+          "type": "range",
+          "id": "font_s_mobile",
+          "label": "Font size",
+          "default": 48,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+          },
+		  {
+          "type": "range",
+          "id": "font_w_mobile",
+          "label": "Font-weight",
+          "default": 600,
+          "min": 100,
+          "max": 800,
+          "step": 100
+          },
+          {
+          "type": "range",
+          "id": "mg_bottom_mobile",
+          "label": "Margin bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+          }
+		]
+        },
+        {
+            "type": "filters",
+            "name": "Product type",
+			"limit": 2,
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Product type"
+                },              
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Type of the filter",
+                    "default": "tags",
+                    "options": [
+                        {
+                            "value": "tags",
+                            "label": "Tags"
+                        },
+                        {
+                            "value": "vendors",
+                            "label": "Vendors"
+                        },
+                        {
+                            "value": "types",
+                            "label": "Product types"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "items",
+                    "label": "Items",
+                    "info": "Separator is '|' or ','"
+                },
+                {
+                "type": "header",
+                "content": "== Setting",
+                "info":"Padding and Margin"
+                },
+                {
+                "type": "color",
+                "id": "cl_text",
+                "label": "color text",
+                "default": "#0a2748"
+                },
+                {
+                "type": "color",
+                "id": "bg_text",
+                "label": "Background color",
+                "default": "#fff"
+                },
+                {
+                "type": "color",
+                "id": "br_text",
+                "label": "border color",
+                "default": "#e1e1e1"
+                },
+                {
+                "type": "color",
+                "id": "cl_text_hover",
+                "label": "color text (Hover)",
+                "default": "#0a2748"
+                },
+                {
+                "type": "color",
+                "id": "bg_text_hover",
+                "label": "Background color (Hover)",
+                "default": "#f8f8f8"
+                },
+                {
+                "type": "color",
+                "id": "br_text_hover",
+                "label": "border color (Hover)",
+                "default": "#e1e1e1"
+                }
+
+            ]
+        }
+        
+    ],
+    "default": {
+      "blocks": [       
+        {
+          "type": "title","type": "filters"
+        }
+      ]
+    }
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

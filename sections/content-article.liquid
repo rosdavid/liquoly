@@ -1,0 +1,465 @@
+{% assign layout = section.settings.layout_blog | plus:0 %}
+{% assign show_tags = section.settings.show_tags %}
+{% assign show_social = section.settings.show_social %}
+{% assign limit_tags = section.settings.limit_tags | plus:0 %}
+
+
+
+{% liquid
+    assign chk_sidebar = true
+%}
+
+<div class=" main-content shop-page main-content-blog single-blog {% if layout == 3 %} right {% endif %}">
+  <div class="container">   
+
+    {% if layout != 1 %} 
+    <a href="javascript:void(0)" class="js-mobile-sidebar mobile-sidebar-btn hidden-lg hidden-md"> 
+      	<i class="fa fa-bars"></i> {{section.settings.title_show_sidebar}}
+    </a>
+    <div class="js-mobile-sidebar-panel mobile-sidebar-panel-overlay"></div>
+    {% endif%}
+    
+    <div class="row flex-layout">
+      <div class="col-xs-12 col-sm-12  {% if layout != 1 %} content-offset-left {% if chk_sidebar == false %} col-md-12 {% else %}col-lg-9 {% endif %} {% if layout != 3 %}content-offset-right {% endif %} {% else %} col-md-12 col-lg-12 {% endif %}">
+        <div class="banner-img-article" >
+      <a href="{{ article.url}}" title="{{ article.title }}">
+      <div class="pr_lazy_img lazyload item__position " data-bgset="{{ article.image.src | img_url: '1920x' }}" data-ratio="{{article.image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;"></div>
+      </a>
+    </div>
+    <div class="content-blog">    	
+    <div class="head head-article">
+      <div class="cms-group-title">
+        <h3 class="blog"><a href="{{blog.url}}">{{blog.title}}</a></h3>
+        <h1><a href="{{ article.url}}" title="{{ article.title }}" class="post-title">{{ article.title }}</a></h1>
+      </div>
+      <div class="wrap-date">
+        <div class="inner-date">
+          <span class="post_date">{{'blogs.article.post_date' | t}}</span>
+          <span class="month">{{ article.created_at | date: "%B" }}</span>,
+          <span class="day">{{ article.created_at | date: "%d" }}</span>
+          <span class="year">{{ article.created_at | date: "%Y" }}</span>
+        </div>
+        <ul class="meta-post">
+          <li class="author">{{'blogs.article.by_author' | t: author : ""}} <a href="#">{{article.author}}</a></li>   
+          <li class="comments"> <span>{{article.comments_count}} {{'blogs.article.comments' | t}} </span></li>                 
+        </ul>
+      </div>
+    </div>
+        <div class="post-item">          
+          <div class="post-info">
+            
+            <div class="main-info-post">              
+                {% if article.excerpt.size > 0 %}
+                {% comment %}{{ article.excerpt | strip_html}} {% endcomment %}
+                	<div class="des">{{ article.content }}</div>
+                {% else %}
+                	<div >{{ article.content }}</div>
+                {% endif %}              
+            </div>
+          </div>
+        </div>
+		<div class="content-blog-bottom">
+        {% if show_tags %}  	
+        <div class="tags">
+          {% if article.tags.size > 0 %}
+          	{% include 'tags-article' ,limit:limit_tags%}                     
+          {% endif %}
+        </div>
+        {%endif%}  
+        {% if show_social %}  
+          
+          {% include 'social-sharing' %}
+          
+        {% endif%}  
+      	</div>  
+		<div class="paginate-post">
+          {% if blog.next_article or blog.previous_article %} 
+              {% if blog.previous_article %}
+              <div class="left">
+                <span class="icon-chevron-left"> </span>{{ 'blogs.article.older_post' | t | link_to: blog.previous_article }}
+              </div>
+              {% endif %}
+              {% if blog.next_article %}
+              <div class="right">
+                {{ 'blogs.article.newer_post' | t | link_to: blog.next_article }} <span class="icon-chevron-right"> </span>
+              </div>
+              {% endif %}
+          {% endif %}
+        </div>
+        {% if section.settings.comment_use_chk %}
+        <div id="primary" class="list-comment content-form">  
+          {% if article.comments_count > 0%}
+          	<h4 class="main-title">{% if article.comments_count > 1 %}{{ 'blogs.comments.comments_with_count.other' | t : count : article.comments_count}} {% else %} {{ 'blogs.comments.comments_with_count.one' | t : count : article.comments_count}} {% endif %}</h4>
+		  {% endif %}
+          {% paginate article.comments by 3 %}
+
+            {% if blog.comments_enabled? %}
+
+              {% if comment and comment.created_at %}
+                  <p class="note form-success">
+                    {% if blog.moderated? %}
+                    	{{ 'blogs.comments.success_moderated' | t }}
+                    {% else %}
+                    	{{ 'blogs.comments.success' | t }}
+                    {% endif %}
+                  </p>
+              {% endif %}
+              {% if article.comments_count > 0 %} 
+                {% for comment in article.comments %}                
+                	{% include 'comment' %}                
+                {% endfor %}
+              {% endif %}
+
+              {% if paginate.pages > 1 %}
+              	{% include 'pagination' %}
+              {% endif %}
+            {% endif %}
+          {% endpaginate %}
+          
+
+          {% include 'blog-comment-form' %}
+
+        </div>  
+        {%endif%}
+      </div>
+      </div>  
+      
+      {% if layout != 1 %} 
+      
+          {% if chk_sidebar %}
+          {% include 'blog-sidebar',layout:layout%}  
+          {% endif %}
+      
+      {% endif %}
+      
+    </div>
+  </div>
+</div>
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "articleBody": {{ article.content | strip_html | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ shop.url | append: page.url | json }}
+    },
+    "headline": {{ article.title | json }},
+    {%- if article.excerpt != blank -%}
+      "description": {{ article.excerpt | strip_html | json }},
+    {%- endif -%}
+    {%- if article.image -%}
+      {%- assign image_size = article.image.width | append: 'x' -%}
+      "image": [
+        {{ article | img_url: image_size | prepend: "https:" | json }}
+      ],
+    {%- endif -%}
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      {%- if settings.logo -%}{%- assign image = settings.logo -%}{%- assign image_size = image.width | append:'x' -%}
+        "logo": {
+          "@type": "ImageObject",
+          "height": {{ image.height | json }},
+          "url": {{ image | img_url: image_size | prepend: "https:" | json }},
+          "width": {{ image.width | json }}
+        },
+      {%- endif -%}
+      "name": {{ shop.name | json }}
+    }
+  }
+  </script>
+{% schema %}
+  {
+    "name": "Article",
+    "settings": [
+		{
+          "type": "header",
+          "content": "==General setting"
+        },
+		{
+          "type": "text",
+          "id": "title_show_sidebar",
+          "label": "Title of show sidebar",
+          "default": "Show Sidebar",
+          "info":"Only appear on mobile and laptop device"
+        },
+	    {
+          "type": "checkbox",
+          "id": "comment_use_chk",
+          "label": "Show comment on blog post",
+          "default": true
+        },
+		{
+          "type": "checkbox",
+          "id": "show_tags",
+          "label": "Show tags on blog post",
+          "default": true
+        },
+		{
+        "type": "text",
+        "id": "limit_tags",
+        "label": "Number of tags",
+        "default": "4"
+        },
+		{
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show social blog post",
+          "default": true
+        },
+	    {
+          "type": "header",
+          "content": "==Sidebar setting"
+        },
+		{
+          "type": "select",
+          "id": "layout_blog",
+          "label": "Select layout",
+          "options": [
+            {
+              "value": "1",
+              "label": "Grid layout without sidebar"
+            },
+            {
+              "value": "2",
+              "label": "Grid layout within left sidebar"
+            },
+            {
+              "value": "3",
+              "label": "Grid layout within right sidebar"
+            }
+          ],
+          "default": "2"
+        }
+	],
+ "blocks": [
+      {
+      "type": "search",
+      "name": "Search on sidebar",
+      "limit": 1,
+      "settings": [
+        {
+        "type": "header",
+        "content": "Search setting"
+        },
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title Search",
+        "default": "Search blog"
+        },
+        {
+        "type": "text",
+        "id": "place_holder_search_sidebar",
+        "label": "Place holder search",
+        "default": "Search blog"
+        },
+        {
+        "type": "text",
+        "id": "icon_search",
+        "label": "Icon Button",
+        "default": "<i class=\"icon-search\"></i>"
+        }
+      ]
+      },
+	  {
+      "type": "social",
+      "name": "Social on sidebar",
+      "limit": 1,
+      "settings": [
+        {
+        "type": "header",
+        "content": "Search social"
+        },
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title Search",
+        "default": "social"
+        }
+      ]
+      },
+      {
+      "type": "category",
+      "name": "Category on sidebar",
+      "limit": 1,
+      "settings": [
+        {
+        "type": "header",
+        "content": "Category setting"
+        },
+        {
+        "type": "text",
+        "id": "title_category_sidebar",
+        "label": "Title of category",
+        "default": "Categories"
+        },
+        {
+        "type": "text",
+        "id": "pagination_limit_category",
+        "label": "Number of item on category",
+        "default": "6"
+        }
+      ]
+      },
+	  {
+      "type": "latestpost",
+      "name": "Latest post on sidebar",
+      "limit": 1,
+      "settings": [
+          {
+          "type": "header",
+          "content": "Latest post setting"
+          },	   
+          {
+          "type": "text",
+          "id": "title",
+          "label": "Title of latest post",
+          "default": "Latest post"
+          },
+          {
+          "type": "blog",
+          "id": "blog",
+          "label": "Select blog"
+          },
+          {
+          "type": "select",
+          "id": "limit_blog_latest",
+          "label": "Number of blog to display",
+          "options": [
+          {
+          "value": "8",
+          "label": "8"
+          },
+          {
+          "value": "6",
+          "label": "6"
+          },
+          {
+          "value": "5",
+          "label": "5"
+          },
+          {
+          "value": "4",
+          "label": "4"
+          },
+          {
+          "value": "3",
+          "label": "3"
+          }
+          ],
+          "default": "5"
+          }
+        ]
+      },
+	  {
+      "type": "newsletter",
+      "name": "Newsletter on sidebar",
+      "limit": 1,
+        "settings": [
+          {
+          "type": "header",
+          "content": "Newsletter setting"
+          },
+          {
+          "type": "text",
+          "id": "title",
+          "label": "Title of newsletter",
+          "default": "Newsletter"
+          },
+          {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle Of newsletter",
+          "default": "Subscribe to our newsletter and get our newest updates right on your inbox."
+          },
+          {
+          "type": "text",
+          "id": "place_holder",
+          "label": "Placeholder of newsletter",
+          "default": "Your email"
+          },
+          {
+          "type": "text",
+          "id": "title_newsletter_checkbox",
+          "label": "Title of checkbox",
+          "default": "I agree to the terms & conditions"
+          },
+          {
+          "type": "text",
+          "id": "title_newsletter_button",
+          "label": "Button",
+          "default": "Subscribe"
+          }
+        ]
+      },
+      {
+      "type": "tags",
+      "name": "Tags on sidebar",
+      "limit": 1,
+      "settings": [
+        {
+        "type": "header",
+        "content": "Tags setting"
+        },
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title tags",
+        "default": "Tags Cloud"
+        },
+        {
+        "type": "text",
+        "id": "limit_tags",
+        "label": "Number of tags",
+        "default": "6"
+        }
+		]
+      },
+      {
+      "type": "author",
+      "name": "Name author",
+      "limit": 1,
+      "settings": [
+        {
+        "type": "header",
+        "content": "Name author setting"
+        },
+        {
+        "type": "image_picker",
+        "label": "Image",            
+        "id": "img_avata",
+        "info":"Dimension: 180x180. If you don't use it, you can leave it blank"
+        },
+        {
+        "type": "richtext",
+        "id": "content",
+        "label": "Custom Html",
+        "default": "<p>There are many variations of passages of lorem ipsum available but the majority have suffered.</p>"
+        },
+        {
+        "type": "image_picker",
+        "label": "Signature",            
+        "id": "img_signature"
+        }
+		]
+      }
+		
+
+    ]
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

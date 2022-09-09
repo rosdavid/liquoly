@@ -1,0 +1,47 @@
+{%- if use_zoom360 -%}
+<script type="text/javascript">
+  /*add zoom360*/
+var count = 0;
+var extension = "";
+{%- for image in product.images -%}
+  var images_name = "{{image.src}}";
+  var index = images_name.replace(/(^.+\/zoom_360_img[-,_])/,'').replace(/(\..+$)/,'');
+  if(jQuery.isNumeric(index)){
+  	count++;
+    if(extension==""){
+    	extension = images_name.match(/(\..+$)/);
+    }
+  }
+{%- endfor -%}
+  if(count>0){
+    var images_meta_data = "{{ product | img_url }}";
+    var images_folder = images_meta_data.match(/^.+\//);
+    jQuery(".wrap-main-slider .slider-fors").append('<div id="main_img_zoom360" data-image-id="zoom360"><div class="cloudimage-360" data-folder='+images_folder+' '+
+                  ' data-filename="zoom_360_img-{index}'+extension[0]+'" '+
+                  ' data-amount="'+count+'" '+
+                  ' data-magnifier="3" '+
+                  ' data-full-screen=true '+
+                  ' data-autoplay=false '+
+                  ' data-spin-reverse=true '+
+                  '</div></div>');
+  }
+  
+  /*remove open_gallery*/
+  var target = $("#main_img_zoom360").get(0);
+  var observer = new MutationObserver(function(mutations) {
+    if (mutations.length) {
+    if($("#main_img_zoom360").attr("aria-hidden")=="true"){
+    	$(".open_gallery").show();
+    }if($("#main_img_zoom360").attr("aria-hidden")=="false"){
+        $(".open_gallery").hide();
+    }
+    }
+  });
+  var config = {
+    attributes: true,
+    attributeFilter: ["aria-hidden"],
+  };
+  observer.observe(target, config);
+</script>
+<script src="{{ 'js-cloudimage-360-view.min.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

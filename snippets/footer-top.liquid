@@ -1,0 +1,114 @@
+<div class="footer-top" style="background-color:{{section.settings.bg}};">
+  <div class="container">
+    <div class="row">
+      {%- for block in section.blocks -%}
+      {%- case block.type -%}
+      {%- when 'html' -%}
+      <div class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+        <aside id="block_{{block.id}}" class="widget widget_text">
+          {%- if block.settings.title != blank -%}
+          <h3 class="widget-title"style="color:{{section.settings.color_footer_title}};">
+            <span class="txt_title">{{block.settings.title}}</span>
+            <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+              <i class="laber-icon-up icon-chevron-up"></i></span> 
+          </h3>{%- endif -%}
+          <div class="textwidget widget_footer">
+            <div class="content_html" style="color:{{section.settings.color_top}};">
+              {{block.settings.content}}
+            </div>  
+
+            <div class="footer_app">
+              <a href="#"><img src="{% if block.settings.app_store %}{{block.settings.app_store | img_url:"181x45"}}{%else%}https://placehold.jp/14/2b2c31/fff/181x45.png?text=278x24+Image{%endif%}" alt="app store"></a>
+              <a href="#"><img src="{% if block.settings.google_play %}{{block.settings.google_play | img_url:"181x45"}}{%else%}https://placehold.jp/14/2b2c31/fff/181x45.png?text=278x24+Image{%endif%}" alt="google play"></a>
+            </div>
+
+          </div>
+
+        </aside>
+      </div>
+      {%- when 'mail' -%}
+      <div class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+        <aside id="block_{{block.id}}" class="widget widget_text widget_mail">
+
+
+
+          {%- if block.settings.title != blank -%}
+          <h3 class="widget-title"style="color:{{section.settings.color_footer_title}};">
+            <span class="txt_title">{{block.settings.title}}</span>
+            <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+              <i class="laber-icon-up icon-chevron-up"></i></span> 
+          </h3>{%- endif -%}
+
+            
+
+
+          <div class="textwidget widget_footer {{block.settings.news_style}}">
+            {% if block.settings.content!= blank %}
+            <div class="content" style="color:{{section.settings.color_top}};">{{block.settings.content}}</div>
+            {% endif %}
+            <div class="footer-mail">                                   	
+              {%- form 'customer', class:'newsletter-form-footer' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <div class="mc4wp-form-fields">
+                <div class="signup-newsletter-form  {{class}}">
+                  <div class="col padding-0"><input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"  value="{% if customer %}{{ customer.email }}{% endif %}" class="{{class_ip}} input-text" required="required"></div>
+                  <div class="col-auto padding-0">
+                    <button type="submit" class="submit-btn truncate{% if settings.checkbox_mail %} mail_agree pr{% endif %}">
+                      <span> 
+                        {{ 'general.newsletter_form.submit' | t }} 
+                        {% if block.settings.btn_icon %}
+                        <i class="fa fa-paper-plane"> </i>
+                        {% endif %}
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {%- if form.posted_successfully? -%}
+              <div class="mc4wp-response">
+                <div class="shopify-message"><i class="las la-check"></i>{{ 'general.newsletter_form.confirmation' | t }}</div>{%- elsif form.errors -%}<div class="shopify-error"><i class="las la-exclamation-triangle"></i>{{ form.errors | default_errors }}</div>
+              </div>
+              {%- endif -%}
+              {%- endform -%}								
+            </div>
+          </div>                          
+        </aside>
+      </div>
+       {%style%}
+      .footer #block_{{block.id}}.widget_mail .widget_footer .signup-newsletter-form .submit-btn{
+        background-color: {{block.settings.color_btn}};
+        
+      }
+      .footer #block_{{block.id}}.widget_mail .widget_footer .signup-newsletter-form .submit-btn:hover {
+        background-color: {{block.settings.color_btn_hover}};
+        border-color: {{block.settings.color_btn_hover}};
+      }
+      {%endstyle%}
+	  {%- when 'social' -%}
+		<div class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+        <aside id="block_{{block.id}}" class="widget widget_text">
+			
+          {%- if block.settings.title != blank -%}
+          <h3 class="widget-title"style="color:{{section.settings.color_footer_title}};">
+            <span class="txt_title">{{block.settings.title}}</span>
+            <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+              <i class="laber-icon-up icon-chevron-up"></i></span> 
+          </h3>{%- endif -%}
+          
+
+          <div class="textwidget widget_footer">
+             {% if block.settings.content!= blank %}
+            <div class="content"style="color:{{section.settings.color_top}};">{{block.settings.content}}</div>
+            {% endif %}
+				{% render 'social_link' %}
+          </div>                          
+        </aside>
+      </div>	
+      
+     
+      	
+      {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div> 

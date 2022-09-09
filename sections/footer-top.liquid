@@ -1,0 +1,420 @@
+{%- assign social_icons = false -%}
+{% assign se_blocks = section.blocks %}
+{% if
+  settings.social_twitter_link != blank
+  or settings.social_facebook_link != blank
+  or settings.social_pinterest_link != blank
+  or settings.social_instagram_link != blank
+  or settings.social_tumblr_link != blank
+  or settings.social_snapchat_link != blank
+  or settings.social_youtube_link != blank
+  or settings.social_vimeo_link != blank
+  or template.name == 'article'
+  or template.name == 'blog'
+%}
+  {%- assign social_icons = true -%}
+{% endif %}
+
+
+{% capture image_footer_size %}{{ section.settings.logo_footer_max_width | escape }}x{% endcapture %}
+{% render 'footer-top' %}
+
+{%- schema -%}
+  {
+    "name": "Footer top",
+    "class": "footer_top",
+    "max_blocks": 6,
+    "settings": [ 
+
+      {
+        "type": "header",
+        "content": "== Footer background"
+      },
+      {
+        "type": "color", 
+        "id": "bg",
+        "label": "Select background color",
+        "default": "#fff"
+      },
+		{
+        "type": "color", 
+        "id": "color_footer_title",
+        "label": "Select color title",
+        "default": "#fff"
+      }, 
+	  {
+        "type": "color", 
+        "id": "color_top",
+        "label": "Select color",
+        "default": "#999"
+      }
+      
+    ],
+    "blocks": [
+      
+	  {
+        "type": "mail",
+        "name": "Newsletter signup",
+        "limit": 1,
+        "settings": [
+         {
+            "type": "select",
+            "id": "news_style",
+            "label": "Newsletter Design:",
+            "default": "style1",
+            "options": [
+              {
+                "value": "style1",
+                "label": "Style 1"
+              },
+              {
+                "value": "style2",
+                "label": "Style 2"
+              },
+              {
+                "value": "style3",
+                "label": "Style 3"
+              }
+            ]
+          },
+          
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Up to 40% off items"
+          },
+          {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
+          },
+		  {
+            "type": "checkbox",
+            "id": "btn_icon",
+            "label": "Button icon?",
+            "default": false
+          },
+          {
+          "type": "color",
+          "id": "color_btn",
+          "label": "background buttons",
+          "default": "#c6452c"
+          },
+          {
+          "type": "color",
+          "id": "color_btn_hover",
+          "label": "background buttons (Hover)",
+          "default": "#c6452c"
+          },
+          {
+            "type": "header",
+            "content": "== Width settings"
+          },
+	       
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "4",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+              {
+              "value": "5",
+              "label": "41.666667%"
+              },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "HTML",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "HTML"
+          },
+          {
+            "type": "html",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>html code</p>"
+          },
+          {
+          "type": "image_picker",
+          "id": "app_store",
+          "label": "App Store",
+          "info": "181x45.jpg recommended"
+          },
+		  {
+          "type": "image_picker",
+          "id": "google_play",
+          "label": "Google Play",
+          "info": "181x45.jpg recommended"
+          },	
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "3",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+              {
+              "value": "5",
+              "label": "41.666667%"
+              },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "social",
+        "name": "Social link",
+        "settings": [
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Follow Us"
+        },
+        {
+        "type": "html",
+        "id": "content",
+        "label": "Content",
+        "default": "We make consolidating, marketing and tracking your social media website easy."
+        },
+        {
+        "type": "select",
+        "id": "cl",
+        "label": "Container width",
+        "default": "3",
+        "options": [
+        {
+        "value": "12",
+        "label": "100%"
+        },
+        {
+        "value": "8",
+        "label": "66%"
+        },
+        {
+        "value": "6",
+        "label": "50%"
+        },
+        {
+        "value": "5",
+        "label": "41.666667%"
+        },
+        {
+        "value": "4",
+        "label": "33%"
+        },
+        {
+        "value": "3",
+        "label": "25%"
+        },
+        {
+        "value": "15",
+        "label": "20%"
+        },
+        {
+        "value": "2",
+        "label": "16%"
+        }
+        ]
+        },
+        {
+        "type": "select",
+        "id": "cl_tb",
+        "label": "Container width tablet",
+        "default": "6",
+        "options": [
+        {
+        "value": "12",
+        "label": "100%"
+        },
+        {
+        "value": "8",
+        "label": "66%"
+        },
+        {
+        "value": "6",
+        "label": "50%"
+        },
+        {
+        "value": "4",
+        "label": "33%"
+        },
+        {
+        "value": "3",
+        "label": "25%"
+        }
+        ]
+        },
+        {
+        "type": "select",
+        "id": "cl_mb",
+        "label": "Container width mobile",
+        "default": "12",
+        "options": [
+        {
+        "value": "12",
+        "label": "100%"
+        },
+        {
+        "value": "6",
+        "label": "50%"
+        }
+        ]
+        }
+        ]
+        }
+    ]
+  }
+{% endschema %}

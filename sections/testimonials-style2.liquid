@@ -1,0 +1,352 @@
+{%- liquid
+  assign sid = section.id 
+  
+    assign layout = section.settings.layout
+  
+  assign autoplay =  section.settings.autoplay
+  assign arrows =  section.settings.arrows
+  assign dots =  section.settings.dots
+  assign infinite =  section.settings.infinite
+    assign col_pr =section.settings.col_pr |plus:0
+    assign col_ipad =section.settings.col_ipad |plus:0
+    assign col_mobile =section.settings.col_mobile |plus:0
+  
+      if col_pr == 5
+    	assign col = 15 
+    else
+    	assign col = 12 | divided_by: col_pr
+    endif
+  
+  %}
+{%- for i in (1..1) -%}
+    
+<section id="laber_{{sid}}">
+			
+    <div class="container {%if layout == 'full-width' %}{{layout}}{%endif%}">
+      {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+      <div class="wrap_title">
+        <div class="wrap_inner_title">
+          {% if section.settings.sub_title!= blank %}
+          <span class="section-subtitle">{{section.settings.sub_title}}</span>
+          {% endif %}
+          
+          {% if section.settings.title != blank %}
+          <h3 class="section-title">{{section.settings.title}}</h3>  
+          {% endif %}
+          
+        </div>
+      </div> 
+      {% endif %} 
+      
+        {%- if section.blocks.size > 0 -%}  
+            <div class="quote_col_right" >
+            <div class="contentTestimonial" >
+               <div class="js-slick-carousel laber-slick-carousel cms-wrap-content row row-10"
+                     
+                     data-slidesToShow="{{col_pr}}" 
+                     data-slidesToScroll="{{col_pr}}" 
+
+                     data-slidesToShowIpad="{{col_ipad}}" 
+                     data-slidesToScrollIpad="{{col_ipad}}"
+
+                     data-slidesToShowMobile="{{col_mobile}}" 
+                     data-slidesToScrollMobile="{{col_mobile}}"
+                     
+                  data-arrows="{{arrows}}" 
+                  data-dots="{{dots}}" 
+                  data-autoplay="{{autoplay}}"
+                  data-infinite="{{infinite}}"
+                     
+               >
+              
+              {% assign index = 0 %}
+			 {%- for block in section.blocks -%}              	  
+                  <div class="quote_slide padding-0-10">
+                    <div class="quote_content">
+                      	<div id="testimonial_{{index}}" class="quote_avatar {% if forloop.first%} active {% endif %}" >
+                          {% assign image = block.settings.image %}
+                          {% assign ratio = image.aspect_ratio %}
+                          {%- if image -%}
+                          <div class="laber_bg_lz lazyload pr_lazy_img" data-bg="{{image | img_url:'83x83' }}" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+                          {% else %}
+                          <div class="laber_bg_lz lazyload pr_lazy_img" data-bg="https://via.placeholder.com/83x83.png/e1e1e1/fff?text=83x83" style="padding-top:100%;"></div>
+                          {%- endif -%}
+                        </div>
+						<div class="cms_content_quote">
+							{{block.settings.content}}
+						</div>
+                      <div class="cms_header_quote">
+                        
+                        {%- if block.settings.show_rating-%}
+                        {%- if block.settings.rating >= 1 -%}
+                          {%- case block.settings.rating -%}
+                              {%- when 1 -%}{% assign class = ', cra2, cra2, cra2, cra2,dn' %}
+                              {%- when 1.5 -%}{% assign class = ',-half pr, cra2, cra2, cra2, cra2' %}
+                              {%- when 2 -%}{% assign class = ',, cra2, cra2, cra2,dn' %}
+                              {%- when 2.5 -%}{% assign class = ',,-half pr, cra2, cra2, cra2' %}
+                              {%- when 3 -%}{% assign class = ',,, cra2, cra2,dn' %}
+                              {%- when 3.5 -%}{% assign class = ',,,-half pr, cra2, cra2' %}
+                              {%- when 4 -%}{% assign class = ',,,, cra2,dn' %}
+                              {%- when 4.5 -%}{% assign class = ',,,,-half pr, cra2' %}
+                              {%- else -%}{% assign class = ',,,,,dn' %}
+                          {%- endcase -%}
+                          {% assign arr = class | split:',' %}
+                          	<div class="quote_rating cra rating_{{block.settings.rating}}"><i class="las la-star{{arr[0]}}"></i><i class="las la-star{{arr[1]}}"></i><i class="las la-star{{arr[2]}}"></i><i class="las la-star{{arr[3]}}"></i><i class="las la-star{{arr[4]}}"></i></div>
+                      	  {%- endif -%}
+                        {%- endif -%}
+						<div class="quote_info">
+                            <div class="quote_address">{{block.settings.address}}</div>
+                        	<div class="quote_author">{{block.settings.title}}</div>
+                        </div>
+                        
+                      </div>
+                      
+                    </div>
+                  </div>
+				 
+              {%- endfor -%} 
+              </div>
+              {%if dots %}
+                  <div class="laber_append_dots"></div>
+              {%endif%}
+            </div>            
+            </div>            
+        {%- else -%}
+          {%- include 'no-blocks' -%}
+        {%- endif -%}
+      </div>
+</section>
+
+{%- render 'section_style' -%}
+
+{%- endfor -%}
+
+
+{%- schema -%}
+  {
+    "name": "Testimonials (style 2)",
+    "class": "nt_section type_testimonials_2 cms_section type_carousel",
+    "max_blocks": 30,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Testimonials"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },  
+      {
+        "type": "header",
+        "content": "== Slider Settings"
+      }, 
+		{
+        "type": "select",
+        "id": "col_pr",
+        "label": "Columns (PC)",
+        "default": "1",
+        "options": [
+          {
+          "value": "1",
+          "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          }
+        ]
+      },
+	  {
+      "type": "select",
+      "id": "col_ipad",
+      "label": "Columns (Ipad)",
+      "info": "How many item you want to show per row",
+      "default": "1",
+      "options": [
+      {
+      "value": "1",
+      "label": "1"
+      },
+      {
+      "value": "2",
+      "label": "2"
+      },
+      {
+      "value": "3",
+      "label": "3"
+      },
+      {
+      "value": "4",
+      "label": "4"
+      }
+      ]
+      },	
+      {
+      "type": "select",
+      "id": "col_mobile",
+      "label": "Columns (Mobile)",
+      "default": "1",
+      "options": [
+      {
+      "value": "1",
+      "label": "1"
+      },
+      {
+      "value": "2",
+      "label": "2"
+      }
+      ]
+      },
+      {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+      },
+      {	
+      "type": "checkbox",
+      "id": "arrows",
+      "label": "Arrows",
+      "default": true
+      },
+      {	
+      "type": "checkbox",
+      "id": "dots",
+      "label": "Dots",
+      "default": true
+      },
+      {	
+      "type": "checkbox",
+      "id": "infinite",
+      "label": "Infinite",
+      "default": false,
+      "info":"Infinity loop. Duplicate last and first items to get loop illusion."	
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Author's image",
+            "info": "200x200 recommend"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Text",
+            "default": "<p>I love my lash tint! I don't have extremely blonde lashes, but I do like that they can be even darker than they are. It makes my eyes stand out more and I love the way it looks!</p>"
+          },
+          {
+             "type": "text",
+             "id": "title",
+             "label": "Author",
+             "default": "Author's name"
+          },
+          {
+             "type": "text",
+             "id": "address",
+             "label": "Address",
+		     "default":"New York"
+          },
+          {	
+          "type": "checkbox",
+          "id": "show_rating",
+          "label": "Show rating",
+          "default": true
+          },  	
+          {
+            "type": "range",
+            "id": "rating",
+            "min": 0,
+            "max": 5,
+            "step": 0.5,
+            "label": "Rating",
+            "info": "Set less than '1' to disable Rating.",
+            "default": 3
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "9. Testimonials(Style 2)",
+        "category": "Text",
+        "blocks": [{"type": "quote"},{"type": "quote"},{ "type": "quote"},{ "type": "quote"},{ "type": "quote"},{ "type": "quote"}]
+      }
+    ]
+  }
+{% endschema %}

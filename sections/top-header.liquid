@@ -1,0 +1,602 @@
+{% if section.settings.home_page_only == false or template.name == 'index' %}
+{% if section.settings.header_use_top_header %}
+<div class="topbar layout1" {% if section.settings.show_border_bottom %}style="border-bottom: 1px solid rgba(255,255,255,.15);" {%endif%}>
+  <div class="container {% if section.settings.layout == 'full-width' %}{{section.settings.layout}} {% endif %}">
+    <div class="row">
+      
+      <div class="announcement-bar">
+        
+        {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        	{%- when 'contac_header' -%} 
+        		{% assign col = block.settings.col %}
+        		{% assign text_align = block.settings.text_align %}
+        		<div class="{{text_align}} col-lg-{{col}} col-12 col-md-12">
+                  <div class="top_contac"> 
+                   <aside id="block_{{block.id}}" class="widget widget_nav_menu">
+                       {%- assign menu = block.settings.menu -%}
+                       {%- if menu != blank -%}
+                       <ul class="menu">
+                         {%- for link in linklists[menu].links -%}
+                         <li class="menu-item{% if link.active %} current-menu-item{% endif %}"><a href="{{ link.url }}">{{ link.title | split: '[' | first }}</a></li>
+                         {%- endfor -%}
+                       </ul>
+                       {%- else -%}Pick a linked list to show here.
+                       {%- endif -%}
+                    </aside>
+                  </div>
+                </div>
+        	{%- when 'message' -%} 
+        		{% assign col = block.settings.col %}
+        		{% assign text_align = block.settings.text_align %}
+                	<div class="wrapper-bar-message {{text_align}} col-lg-{{col}} col-12 col-md-12">
+                      <p class="announcement-bar__message">
+                        {{ block.settings.message_text }}
+                        <a href="{{ block.settings.message_link }}" style="color:{{block.settings.color_link}}" class="shop_now"> {{ 'general.top_header.shop_now' | t }}</a>
+                      </p>
+                    </div>
+        	{%- when 'top_header_3' -%} 
+        		{% assign col = block.settings.col %}
+        		{% assign text_align = block.settings.text_align %}
+        		<div class="col-lg-{{col}} col-12 col-md-12 flex">
+                    <ul class="{{text_align}} menu-language parent-list">
+                      {%if block.settings.header_use_currency%}
+                        <li class="language item-list" >
+                          {% include 'currency-picker' %}
+                          <a href="javascript:void(0);" class="toggle-submenu">                
+                            <span class="lang-currency">{% if settings.default_currency != blank %}{{settings.default_currency}}{% else %}{{shop.currency}}{% endif %}</span><span class="icon"><i class="fa fa-angle-down"></i></span>
+                          </a>  
+                          <ul class="{{shop.currency}} list-currencies currency-lists child-list">         
+                            {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+                            {% assign supported_codes = settings.supported_currencies | split: ' ' %}  
+                            {% assign currency_default = shop.currency %}
+                            {% for code in supported_codes %}
+                              {% if codes contains code %}
+                              	<li data-value="{{ code }}" class="{{ code }}{% if currency_default == code %} active{%endif%}" ><a href="javascript:void(0);"><span class="code_currency">{{ code }}</span></a></li>
+                              {% endif %}
+                            {% endfor %} 
+                          </ul>
+                        </li>
+                      {% endif %}
+                      {%if block.settings.header_use_language%}
+                          <li class="item-list shop-language {% if showFlag %}show-flag{% endif %}">
+                            {% if shop.published_locales.size > 1 %}
+                              {% assign showFlag = settings.show_flag %}
+                              <a data-code="{{shop.locale}}" href="javascript:void(0);" class="toggle-submenu item-active">
+                                {% if showFlag %}<img class="flag" src="" data-src="{{shop.locale | prepend: 'flag_' | append: '.png' | asset_url }}" />{% endif %}                        
+                              <span class="current">{{shop.locale | upcase}}</span><span class="icon"><i class="fa fa-angle-down"></i></span>
+                            </a>
+                            <ul class="dropdown child-list">
+                              {% for locale in shop.published_locales %}
+                              <li data-code="{{ locale.iso_code }}" class="{{ locale.iso_code }}{% if locale.iso_code == shop.locale %} active{% endif%}{% if locale.primary %} primary{% endif%}">
+                                <a data-code="{{ locale.iso_code }}" href="javascript:void(0);" class="language-code">
+                                  {% if showFlag %}<img class="flag" src="" data-src="{{ locale.iso_code | prepend: 'flag_' | append: '.png' | asset_url }}" />{% endif %}      
+                                  <span class"name" style="display:none">{{ locale.name }}</span>
+                                  <span class"code">{{ locale.iso_code | upcase  }}</span>
+                                </a>
+                              </li>
+                              {% endfor %}
+                            </ul>
+                            {% endif %}
+                          </li>
+                      {% endif %}
+					  {% if  block.settings.phone_number != blank %}
+                      		<li class="item-list">
+                              {{ 'general.top_header.text_phone' | t }} <a href="tel:{{block.settings.phone_number}}" style="color:{{block.settings.color_nub_phone}};"> {{block.settings.phone_number}}</a>
+                      		</li>
+                      {% endif %}
+                    </ul> 
+                    {% assign type_social = block.settings.type_social | plus: 0 %}
+                    {%if block.settings.header_use_social%}
+                      	
+                        {%- if type_social == 1 -%}
+                          {% include 'social_link' %}
+                        {%- else -%}
+                            {% include 'social-sharing' %}
+                        {%- endif -%}
+                    {% endif %}
+                  	
+                  </div>
+        	{%- when 'top_header_4' -%} 	
+        		{% assign col = block.settings.col %}
+        		{% assign text_align = block.settings.text_align %}
+        		<div class="{{text_align}} flex col-lg-{{col}} col-12 col-md-12">
+                    <ul class="topbar-menu">
+                        {% assign handle = block.settings.menu_topbar %}     
+                        {% for link in linklists[handle].links %}
+                            <li><a href="{{link.url}}"> {{ link.title }} </a></li>
+                        {% endfor %}
+                    </ul>
+        		   </div>	
+        
+        {%- endcase -%}
+        {%- endfor -%}
+        
+        
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% style%}
+	{% liquid
+      assign bg_top_header = section.settings.bg_top_header
+      assign cl_text = section.settings.cl_text
+      assign cl_text_h = section.settings.cl_text_h 
+    %}
+	.cms-top-header .topbar{
+		background-color:{{bg_top_header}};
+	}
+	.cms-top-header .topbar .announcement-bar .topbar-menu li a,
+	.cms-top-header .topbar .laber-social-sharing label,
+	.cms-top-header .topbar .laber-social-sharing ul li a,
+	.cms-top-header .topbar .announcement-bar .top_contac ul li,
+	.parent-list .item-list>a,
+	.cms-top-header .topbar .announcement-bar .list-socials li a,
+	.cms-top-header .wrapper-bar-message .announcement-bar__message,
+	.cms-top-header .topbar .announcement-bar .top_contac ul li a{
+		color:{{cl_text}}
+	}
+	.cms-top-header .topbar .announcement-bar .topbar-menu li a:hover,
+	.cms-top-header .topbar .laber-social-sharing ul li a:hover,
+	.parent-list .item-list>a:hover,
+	.cms-top-header .topbar .announcement-bar .list-socials li a:hover,
+	.cms-top-header .topbar .announcement-bar .top_contac ul li a:hover{
+		color:{{cl_text_h}}
+	}
+{% endstyle%}
+{% schema %}
+  {
+    "name": "Top header",
+    "class":"cms-top-header",
+    "settings": [
+		{
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "header_use_top_header",
+          "label": "Show top header",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "home_page_only",
+          "label": "Home page only",
+          "default": true
+        },
+               
+		{
+          "type": "select",
+          "id": "layout",
+          "default": "full-width",
+          "options": [
+           {
+              "value": "container",
+              "label": "Container"
+           },
+           {
+              "value": "full-width",
+              "label": "Full Width"
+            }
+          ],
+          "label": "Layout"
+        },
+		{
+          "type": "header",
+          "content": "Design"
+        },
+		{
+          "type": "checkbox",
+          "id": "show_border_bottom",
+          "label": "Show border bottom",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "bg_top_header",
+          "label": "Background color",
+          "default": "#f5f5f5"
+        },
+		{
+          "type": "color",
+          "id": "cl_text",
+          "label": "Color text",
+          "default": "#777"
+        },
+		{
+          "type": "color",
+          "id": "cl_text_h",
+          "label": "Color hover",
+          "default": "#343e45"
+        }
+	],
+	"blocks": [
+		{
+          "type": "contac_header",
+          "name": "Top contac header",
+          "limit": 1,
+          "settings": [
+			  {
+                "type": "link_list",
+                "id": "menu",
+                "label": "Add menu"
+              },
+				{
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              }
+          ]
+        },
+		{
+          "type": "message",
+          "name": "Announcement bar",
+          "limit": 1,
+          "settings": [
+              {
+                "type": "text",
+                "id": "message_text",
+                "label": "Announcement text",
+                "default": "Free Delivery over £40 to most of UK*"
+              },
+              {
+                "type": "url",
+                "id": "message_link",
+                "label": "Announcement link",
+                "info": "Optional"
+              },
+			  {
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },	
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              },
+              {
+              "type": "color",
+              "id": "color_link",
+              "label": "Link color",
+              "default": "#e60023"
+              }
+          ]
+        },
+		{
+          "type": "top_header_3",
+          "name": "currency,language,social",
+          "limit": 1,
+          "settings": [
+               {
+                "type": "checkbox",
+                "id": "header_use_currency",
+                "label": "Display currency on top bar",
+                "default": true
+              },
+              {
+                "type": "checkbox",
+                "id": "header_use_language",
+                "label": "Display language on top bar",
+                "default": true
+              },
+
+              {
+                "type": "header",
+                "content": "Social settings"
+              },
+              {
+                "type": "checkbox",
+                "id": "header_use_social",
+                "label": "Display social on top bar",
+                "default": true,
+                "info":"Note: you can edit social at 'Theme settings' -> 'Social media'"
+              },
+			  {
+               "type": "select",
+               "id": "type_social",
+               "label": "Show sharing Or link:",
+               "options": [
+                 {
+                   "value": "1",
+                   "label": "Social link"
+                 },
+                 {
+                   "value": "2",
+                   "label": "Social sharing"
+                 }
+               ],
+               "default": "2"
+              },
+			  {
+              "type": "text",
+              "id": "phone_number",
+              "default": "+1 (800) 123 456 789",
+              "label": "Phone number"
+              },
+              {
+              "type": "color",
+              "id": "color_nub_phone",
+              "label": "Color Phone number",
+              "default": "#ff7200"
+              },
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              }
+          ]
+        },
+		{
+          "type": "top_header_4",
+          "name": "Topbar menu",
+          "limit": 1,
+          "settings": [
+              {
+                "type": "link_list",
+                "id": "menu_topbar",
+                "label": "Add topbar menu"
+              },
+				{
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              }
+          ]
+        }
+		
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

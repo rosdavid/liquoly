@@ -1,0 +1,111 @@
+{% if section.settings.home_page_only == false or template.name == 'index' %}
+{% if section.settings.header_use_top_bar %}
+<div class="labertopbar">
+  <div class="container">
+    <div class="row">
+      <div class="announcement-bar">
+        {%- for block in section.blocks -%}
+        {%- case block.type -%}
+        	{%- when 'message' -%} 
+                	<div class="wrapper-bar-message">
+                      <p class="announcement-bar__message">
+                        {{ block.settings.message_text }}
+                        <a href="{{ block.settings.message_link }}" style="color:{{block.settings.color_link}}" class="shop_now"> {{ 'general.top_header.shop_now' | t }}</a>
+                      </p>
+                    </div>
+        {%- endcase -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+{% style%}
+	{% liquid
+      assign bg_top_header = section.settings.bg_top_header
+      assign cl_text = section.settings.cl_text
+    %}
+	.cms-top-bar .labertopbar{
+		background-color:{{bg_top_header}};
+	}
+
+	.cms-top-bar .wrapper-bar-message .announcement-bar__message{
+		color:{{cl_text}}
+	}
+{% endstyle%}
+{% schema %}
+  {
+    "name": "Top Bar",
+    "class":"cms-top-bar",
+    "settings": [
+		{
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "header_use_top_bar",
+          "label": "Show top Bar",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "home_page_only",
+          "label": "Home page only",
+          "default": false
+        },
+		{
+          "type": "header",
+          "content": "Design"
+        },
+        {
+          "type": "color",
+          "id": "bg_top_header",
+          "label": "Background color",
+          "default": "#1a73e8"
+        },
+		{
+          "type": "color",
+          "id": "cl_text",
+          "label": "Color text",
+          "default": "#fff"
+        }
+	],
+	"blocks": [
+		{
+          "type": "message",
+          "name": "Announcement bar",
+          "limit": 1,
+          "settings": [
+              {
+                "type": "text",
+                "id": "message_text",
+                "label": "Announcement text",
+                "default": "Free Delivery over £40 to most of UK*"
+              },
+              {
+                "type": "url",
+                "id": "message_link",
+                "label": "Announcement link",
+                "info": "Optional"
+              },
+              {
+              "type": "color",
+              "id": "color_link",
+              "label": "Link color",
+              "default": "#e60023"
+              }
+          ]
+        }
+		
+		
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

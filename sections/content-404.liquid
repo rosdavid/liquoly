@@ -1,0 +1,71 @@
+
+<!-- /templates/404.liquid -->
+<div class="site-content-inner">
+  <div class="page-404">
+    <div class="banner-header">
+      <div class="container wrap-content">
+        <div class="page-404-content">
+          
+              {% assign bg_img_404 = section.settings.bg_img_404 %} 
+              <div class="images col-lg-4 col-md-6 col-12">
+                <div class="lazyload pr_lazy_img laber_bg_lz"  data-bg="{% if bg_img_404 != blank %}{{ bg_img_404 | img_url: '448x448' }}{% else %}https://placehold.jp/50/f3f3f3/222/448x448.png?text=448x448"{% endif %} data-ratio="{{banner2.aspect_ratio}}" style="{% if bg_img_404 != blank %}padding-top:{{ 1 | divided_by: bg_img_404.aspect_ratio | times: 100}}%; {%else%}padding-top:100%; {%endif%}" ></div>
+              </div>
+          
+          <h1 class="oops-404">
+            {{section.settings.title}}
+          </h1>
+          
+          <p>{{section.settings.content}}</p>
+          <div class="wrap-help col-lg-4 col-md-6 col-12">
+            <form id="searchForm404" method="get" class="search-404" action="/search" role="search">
+              <div class="search-block">
+                <div class="search-inner">
+                  <input type="text" class="search-info" placeholder="{{"general.404.key_word_search" | t}}" name="q" {% if search.performed %} value="{{ search.terms | escape | downcase }}"{% endif %}>
+                  <input type="hidden" name="type" value="page" />
+                  <button type="submit" class="search-button">
+                    <i class="icon-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          	<a class="back-homepage" href="/">{{"general.404.link" | t}} </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "404",
+    "settings": [
+        {
+          "type": "header",
+          "content": "404 Setting"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_img_404",
+          "label": "Backdground image"
+        },
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Opps! Page not found."
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Sorry for the inconvenience. Go to our homepage or check out our latest collections."
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

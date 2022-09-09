@@ -1,0 +1,435 @@
+{% liquid
+  assign id = section.id  
+  
+    assign col_pr =section.settings.col_pr |plus:0
+    assign col_ipad_pro =section.settings.col_ipad_pro |plus:0
+    assign col_ipad =section.settings.col_ipad |plus:0
+    assign col_mobile =section.settings.col_mobile |plus:0
+    assign col_mobile_vertical =section.settings.col_mobile_vertical |plus:0
+
+        if col_pr == 5
+    	assign col = 15
+    else
+    	assign col = 12 | divided_by: col_pr
+    endif
+
+  assign autoplay =  section.settings.use_slideshow_autoplay
+  assign arrows =  section.settings.nav_enable
+  assign dots =  section.settings.dot_enable
+  assign infinite =  section.settings.infinite
+    
+%}
+   
+{%- for i in (1..1) -%}  
+  {%- if section.settings.hidden %}{% break %}{% endif -%}
+
+ <section id="laber_{{id}}" class="laber_brand_{{id}}">   
+  <div class="{{section.settings.layout}}">
+    <div class="wrap-section">
+      {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+		<div class="wrap_title ">
+          
+		  {% if section.settings.sub_title!= blank %}
+		  	<span class="section-subtitle">{{section.settings.sub_title}}</span>
+		  {% endif %}
+          
+          {% if section.settings.title != blank %}
+		  <h3 class="section-title">{{section.settings.title}}</h3>  
+		  {% endif %}
+          
+          
+          {% if section.settings.content!= blank %}
+		  <div class="content">{{section.settings.content}}</div>
+		  {% endif %}
+          
+		</div>
+        {% endif %}
+    </div>
+    <div class="cms-wrap-brand2" {%if section.settings.show_border%}style="padding:10px 0;border-top:1px solid {{section.settings.cl_bg_border}}; border-bottom:1px solid {{section.settings.cl_bg_border}};"{%endif%}>       
+			
+      		{% include 'grid-slider', settings:section.settings %}
+      
+            <div class="grid-slider laber-slick-carousel products-slider row" {{gridSlider}}>
+              
+        {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- assign image = block.settings.image -%}
+              {%- assign url = block.settings.url -%}
+              <div class="cat_space_item brand_list {{grid}}">
+                {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{block.settings.open_link}}">{%- endif -%}
+                {%- if image != blank %}
+                  	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
+                {%- else -%}
+                  <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="https://via.placeholder.com/142x70.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=142x70"  data-sizes="auto" style="padding-top:70px;"></div>                   
+                {%- endif -%}
+                {%- if url != blank -%}</a>{%- endif -%}
+              </div>
+            {%- endfor -%}
+        {% else %}
+            {%- for i in (1..6) -%}
+              <div class="cat_space_item brand_list">                                
+                <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="https://via.placeholder.com/142x70.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=142x70"  data-sizes="auto" style="padding-top:70px;"></div>     
+              </div>
+            {%- endfor -%}             	
+        {%- endif -%}
+      </div>
+      {%if dots %}
+      	<div class="laber_append_dots"></div>
+      {%endif%}
+    </div>
+    
+  </div>
+</section>
+{%- render 'section_style' -%}
+
+{%- endfor -%}
+
+
+{%- schema -%}
+  {
+    "name": "Brand list",
+    "class": "cms_section laber_section brand_list type_brand_list type_carousel zoom_img",
+	"max_blocks": 30,
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+	  {
+        "type": "checkbox",
+        "id": "show_border",
+        "label": "Show border top and bottom",
+        "default": false
+      },
+	  {
+        "type": "color",
+        "id": "cl_bg_border",
+        "label": "Border color",
+        "default": "#cccccc"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },	
+	  {
+        "type": "header",
+        "content": "== Setting mobile",
+		"info":"Padding and Margin"
+      },
+	 {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },  
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },
+	  {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
+      },
+      {
+        "type": "header",
+        "content": "== Slider Settings"
+      }, 
+        {
+        "type": "header",
+        "content": "---- Slider Show Collection ----",
+        "info": "Refer to the attribute values [here](httpss://kenwheeler.github.io/slick)"
+    },  
+    {
+        "type": "checkbox",
+        "id": "use-slider",
+        "label": "Use slider?",
+        "default": true
+    },
+    {  
+        "type": "range",  
+        "id": "slides-To-Scroll",  
+        "label": "Slide to scroll",  
+        "info": "The number of items slide to scroll",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 1
+    },   
+    {  
+        "type": "range",  
+        "id": "visible",  
+        "label": "Columns in Visible",
+        "info": "Item(s) in screen ( Size >= 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 5 
+    },
+    {  
+        "type": "range",  
+        "id": "widescreen",  
+        "label": "Columns in Widescreen",
+        "info": "Item(s) in screen ( 1366 <= Size < 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4 
+    },  
+    {  
+        "type": "range",  
+        "id": "desktop",  
+        "label": "Columns in Desktop",
+        "info":  "Item(s) in screen ( 1200 <= Size < 1480 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4  
+    },    
+    {  
+        "type": "range",  
+        "id": "laptop",  
+        "label": "Columns in Laptop",
+        "info": "Item(s) in screen ( 992 <= Size < 1200 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4
+    },    
+    {  
+        "type": "range",  
+        "id": "notebook",  
+        "label": "Columns in Notebook",
+        "info": "Item(s) in screen ( 768 <= Size < 992 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 3  
+    },  
+    {  
+        "type": "range",  
+        "id": "tablet",  
+        "label": "Columns in Tablet",
+        "info": "Item(s) in screen ( 576 <= Size < 768 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 3 
+    },
+    {  
+        "type": "range",  
+        "id": "landscape",  
+        "label": "Columns in Landscape",
+        "info": "Item(s) in screen ( 480 <= Size < 576 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "col",
+        "default": 2 
+    }, 
+    {  
+        "type": "range",  
+        "id": "portrait",  
+        "label": "Columns in Portrait",
+        "info": "Item(s) in screen ( 360 < Size < 480 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "col",
+        "default": 2 
+    },
+    {  
+        "type": "range",  
+        "id": "mobile",  
+        "label": "Columns in Mobile",
+        "info": "Item(s) in screen ( Size  = 360 )",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "col",
+        "default": 1 
+    },
+    {  
+        "type": "range",  
+        "id": "rows",  
+        "label": "Rows Slider",  
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "unit": "col",
+        "default": 1
+    },
+    {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": true
+    },
+    {   
+        "type": "text",
+        "id": "speed",
+        "label": "Speed",
+        "default": "300",
+        "info": "Autoplay Speed in milliseconds"
+    },
+    {   
+        "type": "text",
+        "id": "autoplay-Speed",
+        "label": "Auto Play Speed",
+        "default": "3000",
+        "info": "Autoplay Speed in milliseconds"
+    },
+    {   
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Arrows",
+        "default": true
+    },
+    {   
+        "type": "checkbox",
+        "id": "fade",
+        "label": "Fade",
+        "default": false,
+        "info": "Only use for 1 column"
+    },
+    {   
+        "type": "checkbox",
+        "id": "center-Mode",
+        "label": "Center Mode",
+        "default": false
+    },
+    {   
+        "type": "checkbox",
+        "id": "adaptive-Height",
+        "label": "Adaptive Height",
+        "default": false
+    },
+    {   
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Dots",
+        "default": false 
+    },
+    {   
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Infinite",
+        "default": false
+    },
+    {
+        "type": "number",
+        "id": "padding",
+        "label": "Padding",
+        "default": 15
+    }
+    ],
+	"blocks": [{
+    "type": "brand",
+    "name": "Brand",
+    "settings": [
+      {
+         "type": "image_picker",
+         "id": "image",
+         "label": "Image",
+		 "info": "Dimension: 1170 x 70 px"
+       },
+       {
+        "label": "Link to (Optional)",
+        "id": "url",
+        "type": "url"
+      },
+      {
+        "type": "select",
+        "id": "open_link",
+        "options": [
+          {
+            "value": "_self",
+            "label": "Current window (_self)"
+          },
+         {
+            "value": "_blank",
+            "label": "New window (_blank)"
+          }
+        ],
+        "label": "Open link in",
+        "default": "_blank"
+      }
+      ]
+    }],
+    "presets": [
+      {
+        "name": "Brand list",
+        "category": "Images",
+		"blocks": [
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" },
+          { "type": "brand" }
+        ]
+      }
+    ]
+  }
+{% endschema %}
