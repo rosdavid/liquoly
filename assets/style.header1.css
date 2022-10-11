@@ -1782,8 +1782,8 @@ height: 100vh;
 .hero_canvas .js-cart-inner.cart-empty i.icon-cart-empty{
     font-size: 30px;
     margin-bottom: 20px;
-   -webkit-mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/41/assets/cart-empty.svg?v=112903831141716543191662320668) no-repeat center center;
-    mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/41/assets/cart-empty.svg?v=112903831141716543191662320668) no-repeat center center;
+   -webkit-mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/42/assets/cart-empty.svg?v=112903831141716543191665350167) no-repeat center center;
+    mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/42/assets/cart-empty.svg?v=112903831141716543191665350167) no-repeat center center;
     width: 142px;
     height: 102px;
     background-color: #e0e3e8;
@@ -2262,8 +2262,8 @@ input.search_header__input:not([type=submit]):not([type=checkbox]) {
   transform: translate(0,20px);
   max-height:365px;
   overflow-y: auto;
-  left: 156px;
-	right: 0;
+  left: 1px;
+  right: 15px;
   width: auto;
 }
 .js_prs_search .product-item .product-image,

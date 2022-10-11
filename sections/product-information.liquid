@@ -371,7 +371,7 @@
           				{%- when 'tags' -%}
           					{% if product.tags%}
           					<div class="tags_product clearfix">
-                                <p data-js-product-tags ><label class="label">{{ 'products.product.tags' | t }}:</label>
+                                <!-- <p data-js-product-tags ><label class="label">{{ 'products.product.tags' | t }}:</label> -->
                                 	{%- assign tags_id = block.settings.tags -%}
                                   {%- if tags_id != blank -%}
                                    {%- assign tags_text = tags_id | replace: ' ,', ',' | replace: ', ', ',' | split: ',' -%}
@@ -379,8 +379,8 @@
                                   {%- for tags in product.tags  -%}
                                     {%- for tags_t in tags_text -%}
                                         {%- if tags == tags_t -%}
-                                          <a href="/collections/all/{{ tags}}" title="{{ tags}}">
-                                            <span>
+                                          <!-- <a href="/collections/all/{{ tags}}" title="{{ tags}}"> -->
+                                            <span class="badge_label">
                                               {{ tags}}
                                             </span>
                                           </a>

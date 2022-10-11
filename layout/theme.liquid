@@ -31,7 +31,7 @@
   <script>
     var theme = { moneyFormat: {{ shop.money_format | json }},moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }}}
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-    const type_name = "{{request.page_type}}", t_cartCount = 1,t_shop_currency = "USD", t_moneyFormat = "\u003cspan class='money'\u003e${{amount}}\u003c\/span\u003e", t_cart_url = "\/cart", pr_re_url = "\/recommendations\/products"; 
+    const type_name = "{{request.page_type}}", t_cartCount = 1,t_shop_currency = "EUR", t_moneyFormat = "\u003cspan class='money'\u003e${{amount}}\u003c\/span\u003e", t_cart_url = "\/cart", pr_re_url = "\/recommendations\/products"; 
      $(window).on('load', function () {
           $("html:not('.no-js') .page-load").fadeOut("slow")
      });    

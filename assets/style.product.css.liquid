@@ -935,7 +935,6 @@
   color:var(--color-compare-price-product);
   margin: unset;
   font-weight: 400;
-  text-decoration: line-through;
   margin-left: 5px;
 }
 .product-item .product-collection__content .frm-price-color .product-collection__price .price--sale .compare span {
@@ -1358,8 +1357,9 @@
 
  .details-info label {
    font-size: 14px;
-   color: #0a2748;
+   color: #222;
    margin-right:10px;
+   font-weight: 400;
 }
 .details-info label.label{
   min-width: 110px;
@@ -1517,7 +1517,7 @@ color: #0068c9;
   margin:0 0 25px 0;
 }
 .details-info .price.price--sale .current .money{
-	color:#cc1414;
+	color: var(--color-main);
 }
 .details-info .price.price--sale .compare{
   color: #a4a4a4;
@@ -1953,18 +1953,9 @@ color: #0068c9;
   padding: 3px 5px;
   position: absolute;
   text-transform: capitalize;
-  -webkit-transform: translate(-50%,0);
-  -moz-transform: translate(-50%,0);
-  -ms-transform: translate(-50%,0);
-  -o-transform: translate(-50%,0);
   transform: translate(-50%,0);
   visibility: hidden;
   white-space: nowrap;
-  -webkit-transition: all .5s ease 0s;
-  -moz-transition: all .5s ease 0s;
-  -ms-transition: all .5s ease 0s;
-  -o-transition: all .5s ease 0s;
-  transition: all .5s ease 0s;
 }
 .laber-social-sharing ul li a span:before {
     border-color: rgba(0,0,0,.8) transparent;
@@ -3178,4 +3169,11 @@ div#tab_product {
 }
 .qty{
   display: inline-flex;
+}
+.badge_label{
+  background: #dae4f7;
+  padding: 10px;
+  border-radius: 10px;
+  color: #222;
+  font-weight: 500;
 }
