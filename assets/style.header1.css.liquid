@@ -132,8 +132,14 @@ header#lheader{
 
 @media (max-width: 767px) {
   .cms-top-header .topbar .announcement-bar {
-    display: unset;
+    /*display: unset;*/
     padding:10px 0;
+  }
+  .col-lg-6.col-12.col-md-12.flex {
+    display:none;
+  }
+  .topbar-right.col-lg-4.col-12.col-md-12 {
+    display: none;
   }
 }
 
@@ -287,7 +293,7 @@ header#lheader{
 }
 @media (max-width: 767px) {
   .cms-top-header .topbar{
-    display: none !important;
+    
   }
   .parent-list .item-list {
     display: inline-block;
@@ -2426,15 +2432,15 @@ padding-bottom: 15px;
 }
 
 .js_prs_search .money{
-  font-size:16px;
-  color:#343e45;
+  font-size:14px;
+  color:#a4a4a4;
 }
 .js_prs_search .compare .money{
   text-decoration: line-through;
   margin-right: 5px;
 }
 .js_prs_search .current .money{
-	color: #e60023;
+	color: var(--color-current-product);
 }
 
 .type_product a {

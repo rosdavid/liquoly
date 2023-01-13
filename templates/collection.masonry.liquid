@@ -51,7 +51,7 @@
 <div class="main-content shop-page main-content-grid">
   <div class="container">
     <div class="breadcrumbs">
-      <a href="/">Home</a> / {%if collection.handle != 'all'%} {{collection.title | link_to: collection.url}} {% else %}{{ 'Shop'| link_to: collection.url}} {% endif %}
+      <a href="/">Inicio</a> / {%if collection.handle != 'all'%} {{collection.title | link_to: collection.url}} {% else %}{{ 'Shop'| link_to: collection.url}} {% endif %}
     </div>
     <div class="row">      
       {% paginate collection.products by settings.pagination_limit %}
@@ -111,7 +111,7 @@
           {% if val_2 > paginate.items %}
           	{% assign val_2 = paginate.items %}
           {% endif %}
-          <span class="note products-result-count">Mostrando {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} de {{paginate.items}}</span>
+          <span class="note products-result-count">Mostrando {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} {{'collections.general.of' | t}} {{paginate.items}}</span>
         </div>
         {% endpaginate %}
       </div>      

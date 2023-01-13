@@ -224,7 +224,7 @@ $(document).ready(function() {
                       },500)
                     }
             })
-            //vHtml = vHtml + json_to_html(paramElement,vView,paramIndex,vPage, vcol);  /* Gọi hàm để tạo giao diện html cho sản phẩm rồi thêm vào biến vHtml */
+            vHtml = vHtml + json_to_html(paramElement,vView,paramIndex,vPage, vcol);  /* Gọi hàm để tạo giao diện html cho sản phẩm rồi thêm vào biến vHtml */
             vSumProduct++; /* Tăng biến tổng sản phẩm khi tìm thấy sản phẩm thoả mãn điều kiện */                     
             vCount++; /*Tăng biến đếm*/
             vIndex++; /* Tăng chỉ số duyệt sản phẩm trong mảng sản phẩm */
@@ -275,7 +275,7 @@ $(document).ready(function() {
         initFilterPrice(); /* Gọi lại hàm lọi với price*/
       })
       
-      /*jQuery(document).on('pjax:end', function (xhr, textStatus, options) { 
+      jQuery(document).on('pjax:end', function (xhr, textStatus, options) { 
         
         $('div[data-range-price]').slider({
           range: true,

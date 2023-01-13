@@ -1589,12 +1589,11 @@
     width: 24px;
     height: 33px;
     background-color: var(--color-hover);
-    -webkit-mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/42/assets/icon_1.svg?v=88228216461653808691665350168) no-repeat center center;
-    mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/42/assets/icon_1.svg?v=88228216461653808691665350168) no-repeat center center;
+    -webkit-mask: url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/icon_1.svg?v=88228216461653808691673045373) no-repeat center center;
+    mask: url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/icon_1.svg?v=88228216461653808691673045373) no-repeat center center;
     display: block;
     position: absolute;
     left: 0;
-    bottom: 3px;
 
 }
 

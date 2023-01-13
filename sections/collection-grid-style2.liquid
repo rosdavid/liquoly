@@ -100,6 +100,7 @@
                     </div>
                     <div class="product-info">
                       <div class="product__title"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t | capitalize }}</a></div>
+                      {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
                       <div class="product__price">$19.99</div>
                     </div>
                   </div>
@@ -120,6 +121,7 @@
                       </div>
                       <div class="product-info">
                         <div class="product__title"><a href="/admin/products">{{ 'homepage.onboarding.product_title' | t | capitalize }}</a></div>
+                        {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
                         <div class="product__price">$19.99</div>
                       </div>
                     </div>

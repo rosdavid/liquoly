@@ -116,10 +116,12 @@
 @font-face {
   font-family: 'monumentextended-regular';
   src:  url('monumentextended-regular.otf');
+  font-display: swap;
 }
 @font-face {
   font-family: 'monumentextended-ultrabold';
   src:  url('monumentextended-ultrabold.otf');
+  font-display: swap;
 }
 
 body{
@@ -1146,7 +1148,13 @@ align-items: center;
  .shoppingcart-content {
 	 margin-bottom: 100px;
 }
-  .shoppingcart-content .col-lg-8.left{padding-right:45px;}
+  .shoppingcart-content .col-lg-8.left{
+    border: 1px solid #d4dae4;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 2px 13px -5px rgb(0 0 0 / 20%);
+    -moz-box-shadow: 4px 2px 13px -5px rgb(0,0,0,.2%);
+    box-shadow: 4px 2px 13px -5px #0003;
+  }
  .shoppingcart-content .cart-content {
    
 }
@@ -1328,13 +1336,13 @@ align-items: center;
   	display:none;
   }
  .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td a {
-   color: #222;
+   color: #fff;
     font-weight: 500;
     font-size: 14px;
     display: inline-block;
     padding: 0 30px;
     line-height: 50px;
-    background: var(--color-hover);
+    background: #1e33af;
     border-radius: 3px;
       text-transform: uppercase;
       margin-right:10px;
@@ -1355,7 +1363,7 @@ align-items: center;
   }
   @media (max-width: 400px){
     .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td a {
-    	 padding: 0 15px;
+    	 padding: 8px;
       font-size: 10px;
     }
     .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td .right .submit{
@@ -1365,7 +1373,7 @@ align-items: center;
   .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td .right .submit:hover,
   .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td a:hover{
   	background:var(--color-btn-hover);
-      color:#222;
+      color:#fff;
   }
  .shoppingcart-content .infor {
 	 padding: 0;
@@ -1797,7 +1805,7 @@ align-items: center;
    top: 0;
    right: 0;
    transform: none;
-   color: var(--color-main);
+   color: #fff;
    opacity: 1;
    width: 40px;
    height: 40px;
@@ -4555,21 +4563,23 @@ content: "";
   .js_popup_prpr_wrap_newsletter .title_newslette{margin-bottom:15px;}
   .js_popup_prpr_wrap_newsletter .sub_title_newslette h5{
     font-size: 14px;
-    color: #fff;
-    margin:20px 0 0;
+    color: #222;
+    padding:0 20px 0;
     font-weight: 500;
     text-transform: uppercase;
+    margin-bottom: 30px;
   }
   .js_popup_prpr_wrap_newsletter .title_newslette h4{
     font-size: 60px;
     color: var(--color-hover);
-    margin: 20px 0 0;
+    padding:0 20px 0;
     font-weight: 500;
       text-transform: uppercase;
+    margin-top: -10px;
   }
   .js_popup_prpr_wrap_newsletter .desc {
 	font-size: 14px;
-    color: #fff;
+    color: #222;
     margin:5px 0 0;
     font-weight: 500;
     text-transform: uppercase;
@@ -4580,13 +4590,13 @@ content: "";
 }
   .js_popup_prpr_wrap_newsletter .input-text {
 	font-size: 13px;
-    color: #8ab3db;
-    width: 100%;
+    color: #222;
+    width: 70%;
     text-align: center;
-    border: 1px solid #16395d;
+    border: 1px solid #a4a4a4;
     height: 45px;
     border-radius: 30px;
-    background: #0d2a47;
+    background: #fff;
   }
   .js_popup_prpr_wrap_newsletter .group-input {
     margin-top: 52px;
@@ -4612,9 +4622,8 @@ content: "";
 }
   .js_popup_prpr_wrap_newsletter .wrap-newslette-popup button.btn {
     background-color: var(--color-btn);
-    display: block;
-    width: 100%;
-    color:var(--color-main);
+    width: 70%;
+    color:#fff;
     font-size: 13px;
     font-weight: 500;
     height: 46px;
@@ -4630,7 +4639,7 @@ content: "";
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 5px;
   }
   .js_popup_prpr_wrap_newsletter .wrap-newslette-popup .checkbox input{
   	margin:0;
@@ -4639,7 +4648,7 @@ content: "";
   .js_popup_prpr_wrap_newsletter .wrap-newslette-popup .checkbox label{
     font-size: 13px;
     font-weight: 400;
-    color: #5f8ab3;
+    color: #222;
     font-style: italic;
   }
   .js_popup_prpr_wrap_newsletter .mfp-close{
@@ -4664,6 +4673,7 @@ content: "";
     }
     .js_popup_prpr_wrap_newsletter .sub_title_newslette h5{
     	font-size: 13px;
+        margin-bottom: 30px;
     }
     .js_popup_prpr_wrap_newsletter .mfp-close{
       top: 0;

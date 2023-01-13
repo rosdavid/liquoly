@@ -16,9 +16,14 @@
    background: #fff;
 }
  @media (max-width: 480px) {
-	 .sticky_atc_wrapper {
-		 display: none;
+	 .sticky_atc_wrapper {		 
 	}
+   .sticky_atc_content {
+     display: none;
+   }
+   .sticky_variant_content {
+     display: none;
+   }
 }
  .sticky_atc_wrapper.sticky_atc_shown {
 	 -webkit-transform: translate3d(0, 0, 0);

@@ -32,8 +32,10 @@
     {% endif %}  
     <div id="tab3" class="tab-panel">
       <div class="custom-review">
+        {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: true, product: product %}
         <div class="row">
-          <div id="shopify-product-reviews" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-id="{{product.id}}">
+           
+   {% comment %}<div id="shopify-product-reviews" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-id="{{product.id}}">{% endcomment %}     
             {{ product.metafields.spr.reviews }}
           </div>          
         </div>

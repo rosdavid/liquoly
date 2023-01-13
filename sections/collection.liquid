@@ -38,14 +38,12 @@
         </div>
         <div class="bot_page_collection">
           {% if paginate.pages > 1 %}
-          	{%comment%}
               {% assign val_1 = paginate.current_offset%}
               {% assign val_2 = val_1 | plus: paginate.page_size %}
               {% if val_2 > paginate.items %}
                 {% assign val_2 = paginate.items %}
               {% endif %}
               <span class="note products-result-count col align-left">{{'collections.general.showing' | t}} {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} {{'collections.general.of' | t}} {{paginate.items}} {{'collections.general.results' | t}}</span>
-            {%endcomment%}
           <nav class="pagination js_paginate_ajax col-auto">      
             {%comment%}{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}{%endcomment%}
             <ul class="page-numbers list-page">

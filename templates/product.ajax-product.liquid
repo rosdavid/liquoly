@@ -190,13 +190,14 @@
               </div>
           {%- endif -%}
           {%- if show_reviews -%}
-              {% include 'reviews-count' %}
-              {% if product_reviews_count > 0%}
-              <div class="product-collection__reviews">
-                {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
-              </div>
-              {% endif %}
+            {% include 'reviews-count' %}
+            
+    {% comment %}        <div class="product-collection__reviews">
+              {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+            </div>{% endcomment %}
+           
             {%- endif -%}
+            {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: true, product: product %}
           <div class="frm-price-color"> 
             {%- if show_price -%}
               <div class="product-collection__price ">

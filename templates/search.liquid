@@ -105,7 +105,7 @@ var json_collection_filter =  {{collection.products | json }};
                     {% assign val_2 = paginate.items %}
                     {% endif %}
                     <div class="col laber-products-count">
-                      <span class="note products-result-count  align-left">{{'collections.general.showing' | t}} {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} of {{paginate.items}} {{'collections.general.results' | t}}</span>
+                      <span class="note products-result-count  align-left">{{'collections.general.showing' | t}} {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} de {{paginate.items}} {{'collections.general.results' | t}}</span>
                     </div>
                     {% endif %} 
                     {% include 'collection-views' %} 

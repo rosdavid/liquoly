@@ -1,4 +1,4 @@
-/*(function ($) {
+(function ($) {
     $.fn.StickySidebar = function (options) {
         var defaults = {
             'containerSelector': '',
@@ -317,5 +317,4 @@
             });
         }
     }
-})(jQuery);
-*/
+})(jQuery);er

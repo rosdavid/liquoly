@@ -219,7 +219,7 @@
              
           </div>
       {%- endcapture -%}  
-  	{%comment%}
+
        {%- when 'filter_by_price' -%}
             {%- capture navigation_content -%}
   			{% assign products = collection.products | sort: 'price' %}
@@ -233,7 +233,7 @@
               </div>
             {%- endcapture -%}
             {%- assign has_content = true -%}
-  {%endcomment%}
+
       {%- when 'products' -%}
             {% capture no_content_message %}{{ 'collections.sidebar.no_content' | t }}{% endcapture %}
             {%- capture navigation_content -%}

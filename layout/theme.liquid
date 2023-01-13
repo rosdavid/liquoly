@@ -1,6 +1,24 @@
 <!doctype html>
 <html class="no-js" lang="{{ shop.locale }}">
-<head>
+<head>{% render 'spdn' %}
+  <!-- Google tag (gtag.js) -->
+
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11051867104');
+  </script>
+
+  <!-- Event snippet for Google Shopping App View Item conversion page -->
+  <script>
+  gtag('event', 'conversion', {
+      'send_to': 'AW-11051867104/j7zXCL-tloYYEOC3-JUp',
+      'value': 1.0,
+      'currency': 'EUR'
+  });
+  </script>
   <meta charset="utf-8">   
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -37,9 +55,12 @@
      });    
   </script>  
   {{ content_for_header }}
-</head>
+  {% render 'delivery_coder' %}
+  {% render 'judgeme_core' %} 
+ <img alt="icon" width="1400" height="1400" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 99vw; height: 99vh; max-width: 99vw; max-height: 99vh;"  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+"></head>
 {%- assign admin_sp = request.design_mode -%}
 <body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first }} {% if template contains 'index' %} home {%else%} subpage {% endif %} {{ rtlClasses }}" data-header="{{settings.select_header}}">
+{% include 'agechecker' %}
 {%comment%}
   	
     <div class="page-load laberloading">
@@ -123,5 +144,11 @@
   		  include 'popups' 
     %}   
   </div>
-</body>
+
+	{%- render 'flits_capture_code' with 'load_snippet',template:'flits_snippet' -%}
+
+
+
+
+{% render 'spdn2' %}</body>
 </html>

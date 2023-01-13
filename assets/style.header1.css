@@ -132,8 +132,14 @@ header#lheader{
 
 @media (max-width: 767px) {
   .cms-top-header .topbar .announcement-bar {
-    display: unset;
+    /*display: unset;*/
     padding:10px 0;
+  }
+  .col-lg-6.col-12.col-md-12.flex {
+    display:none;
+  }
+  .topbar-right.col-lg-4.col-12.col-md-12 {
+    display: none;
   }
 }
 
@@ -287,7 +293,7 @@ header#lheader{
 }
 @media (max-width: 767px) {
   .cms-top-header .topbar{
-    display: none !important;
+    
   }
   .parent-list .item-list {
     display: inline-block;
@@ -1782,8 +1788,8 @@ height: 100vh;
 .hero_canvas .js-cart-inner.cart-empty i.icon-cart-empty{
     font-size: 30px;
     margin-bottom: 20px;
-   -webkit-mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/42/assets/cart-empty.svg?v=112903831141716543191665350167) no-repeat center center;
-    mask: url(//cdn.shopify.com/s/files/1/0480/7825/8343/t/42/assets/cart-empty.svg?v=112903831141716543191665350167) no-repeat center center;
+   -webkit-mask: url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/cart-empty.svg?v=112903831141716543191673045342) no-repeat center center;
+    mask: url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/cart-empty.svg?v=112903831141716543191673045342) no-repeat center center;
     width: 142px;
     height: 102px;
     background-color: #e0e3e8;
@@ -2426,15 +2432,15 @@ padding-bottom: 15px;
 }
 
 .js_prs_search .money{
-  font-size:16px;
-  color:#343e45;
+  font-size:14px;
+  color:#a4a4a4;
 }
 .js_prs_search .compare .money{
   text-decoration: line-through;
   margin-right: 5px;
 }
 .js_prs_search .current .money{
-	color: #e60023;
+	color: var(--color-current-product);
 }
 
 .type_product a {

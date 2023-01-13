@@ -94,10 +94,16 @@
                      class="required password_confirm input-info {% if form.errors contains 'password_confirmation' %} input--error{% endif %}"
                      >
             </div>
-          
+          <div class="accepts-marketing">
+								<input type="hidden" name="customer[accepts_marketing]" value="" />
+								<input type="checkbox" name="customer[accepts_marketing]" checked/>
+                          		<label for="accepts-marketing">Deseo recibir las mejores ofertas y noticias de liquoly.</label>
+							</div>
+          <p>Una vez le des al botón para registrarte, revisa tu bandeja de entrada (a veces incluso en spam) para activar tu cuenta.</p>
           <div class="group-button">            
             <input type="submit" class="button submit" value="{{ 'customer.register.submit' | t }}"/>
           </div>
+          <p>Continuando este proceso, aceptas los <a href="https://liquoly.com/policies/terms-of-service">términos y condiciones</a>, la <a href="https://liquoly.com/policies/privacy-policy">política de privacidad</a> de liquoly y afirmas ser mayor de edad. Ver <a href="https://liquoly.com/policies/legal-notice">detalles legales.</a></p>
           <p class="or"><span>{{'customer.register.or' | t}}</span></p>
           <div class="register_submit">
             <a href="/account/login" >

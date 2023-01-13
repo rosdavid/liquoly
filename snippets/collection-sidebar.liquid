@@ -84,7 +84,7 @@
       <div class="widget widget_filter_price box-has-content">
         <h3 class="widgettitle">{{ settings.filter_price_title | strip_html }}</h3>
         <div class="price-filter">
-          <div data-range-price data-label-reasult="price:" data-min="0" data-max="{{settings.collection_max_price | divided_by: 100 | times: 1.25}}" data-unit="$" class="range-price" data-value-min="{{settings.collection_min_price | divided_by: 100}}" data-value-max="{{settings.collection_max_price | divided_by: 100}}"></div>
+          <div data-range-price data-label-reasult="price:" data-min="0" data-max="{{settings.collection_max_price | divided_by: 100 | times: 1.25}}" data-unit="€" class="range-price" data-value-min="{{settings.collection_min_price | divided_by: 100}}" data-value-max="{{settings.collection_max_price | divided_by: 100}}"></div>
           <div data-amount-price class="amount-range-price">Price: <span data-from class="from">{{settings.collection_min_price | money}}</span> - <span data-to class="to">{{settings.collection_max_price | money}}</span></div>
           <a href="#" class="filter">Filter</a>
         </div>

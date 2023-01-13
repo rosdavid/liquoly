@@ -100,6 +100,8 @@
                     <h3 class="product-collection__title">
                       	<a class="cd" href="/admin/products">{{ 'homepage.onboarding.product_title' | t }}</a>
                    	</h3>
+                   {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
+
                     <span class="price price--sale">
                       	<span class="compare"><span class="money">$39.00</span></span>
                       	<span class="current"><span class="money">$59.00</span></span>

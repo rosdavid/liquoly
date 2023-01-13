@@ -82,7 +82,7 @@
           <a class="cms-btn cms-btn-cart" href="{{routes.cart_url}}">{{ 'cart.general.view' | t }}</a>
           <a class="cms-btn cms-btn-check" href="{{routes.cart_url | replace_last : "cart", "checkout"}}">{{ 'cart.general.checkout' | t }}</a>
         </div>
-    {% include 'free-shipping' %}
+    {% comment %}{% include 'free-shipping' %} {% endcomment %}
       </div>
     {% else %}    
       <div class="js-cart-inner cart-empty">
@@ -99,6 +99,6 @@
         <a class="cms-btn cms-btn-cart" href="{{routes.cart_url}}">{{ 'cart.general.view' | t }}</a>
         <a class="cms-btn cms-btn-check" href="{{routes.cart_url | replace_last : "cart", "checkout" }}">{{ 'cart.general.checkout' | t }}</a>
       </div>
-      {% include 'free-shipping' %}
+      {% comment %}{% include 'free-shipping' %} {% endcomment %}
     </div>
     {% endif %} 
