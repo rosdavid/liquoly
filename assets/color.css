@@ -10,7 +10,6 @@ a:hover{
   color:#1a73e8
 }
 
-/* ###################### Màu chính  ##################################*/
 .sidebar .content .btn-newsletter,
 .main-content-grid .content-sidebar .layer-navigation__accordion .layer-navigation__content .collections-menu__button a.active .laberIcon, .main-content-grid .content-sidebar .layer-navigation__accordion .layer-navigation__content .collections-menu__item.active a .laberIcon,
 .box-menu-moible .tab_mobile,.close-sidebar-btn,
@@ -73,7 +72,6 @@ a:hover{
 	fill: #222222;
 }
 
-/* ############################ màu phụ #############################*/
 .main-content-blog .tags .title .tag-area a:hover,
 .single-blog .head-article .inner-date,
 .sidebar .content .btn-newsletter:hover,

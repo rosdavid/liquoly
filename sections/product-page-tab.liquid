@@ -16,7 +16,7 @@
                 {%- when 'tab_reviews' -%}
                     {% include 'reviews-count' %}
                     {%- assign title_reviews = block.settings.title_reviews-%}
-                    <li><a data-animated="rotateInDownLeft" data-toggle="pill" href="#tab_review"><i class="icon icon-star_outline"></i>{{title_reviews}} ( {{ product_reviews_count }} ) </a></li>
+                    <li><a data-animated="rotateInDownLeft" data-toggle="pill" href="#tab_review"><i class="icon icon-star_outline"></i>{{title_reviews}}</a></li>
                 {%- when 'show_variants' -%}{% if product.has_only_default_variant %}{% continue %}{% endif -%}
                     <li><a data-animated="rotateInDownLeft" data-toggle="pill" href="#tab_variants">{{ block.settings.title }}</a></li>
     			{%- when 'tab_metafields' -%}

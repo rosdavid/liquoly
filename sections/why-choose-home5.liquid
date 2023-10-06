@@ -25,7 +25,7 @@
                       <div class="cms-box">                
                         <div class="cms-img">
                           {%- if block.settings.image -%} 
-                          <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ block.settings.image | img_url:'70x70' }}" width="70" height="70" alt=""/>
+                          <img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ block.settings.image | img_url:'70x70' }}" width="70" height="70" alt=""/>
                           {% else %}
                           <div class="nt_bg_lz lazyload pr_lazy_img" data-bg="https://via.placeholder.com/70x70.png/e1e1e1/fff?text=70x70" style="padding-top:100%;"></div>
                           {%- endif -%}
@@ -44,7 +44,7 @@
               <div class="cms-right col-lg-4 col-md-12 col-sm-12">
                 <div class="cms-banner">
                   {%- if section.settings.banner -%} 
-                  	<img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ section.settings.banner | img_url:'598x579' }}" style="width:auto; height:auto;" alt=""/>
+                  	<img class="lazyload" loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ section.settings.banner | img_url:'598x579' }}" style="width:auto; height:auto;" alt=""/>
                   {% else %}
                   	<div class="nt_bg_lz lazyload pr_lazy_img" data-bg="https://via.placeholder.com/598x579.png/e1e1e1/fff?text=598x579" style="padding-top:121.62%;"></div>
                   {%- endif -%}

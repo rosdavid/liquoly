@@ -1,6 +1,6 @@
 <script>(function(){if(typeof EventTarget!=="undefined"){let func=EventTarget.prototype.addEventListener;EventTarget.prototype.addEventListener=function(type,fn,capture){this.func=func;if(typeof capture!=="boolean"){capture=capture||{};capture.passive=!1}
 this.func(type,fn,capture)}}}())</script>
-<script src="{{ 'jquery.min.js' | asset_url }}"></script>
+<script defer src="{{ 'jquery.min.js' | asset_url }}"></script>
 <script src="{{ 'admin_setting.js' | asset_url }}" defer="defer"></script>
 <script src="//cdn.shopify.com/s/javascripts/currencies.js" defer="defer"></script>
 <script src="{{ 'jquery.currencies.min.js' | asset_url }}" defer="defer"></script>

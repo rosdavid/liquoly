@@ -1788,8 +1788,8 @@ height: 100vh;
 .hero_canvas .js-cart-inner.cart-empty i.icon-cart-empty{
     font-size: 30px;
     margin-bottom: 20px;
-   -webkit-mask: url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/cart-empty.svg?v=112903831141716543191673045342) no-repeat center center;
-    mask: url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/cart-empty.svg?v=112903831141716543191673045342) no-repeat center center;
+   -webkit-mask: url(//liquoly.com/cdn/shop/t/10/assets/cart-empty.svg?v=112903831141716543191696526749) no-repeat center center;
+    mask: url(//liquoly.com/cdn/shop/t/10/assets/cart-empty.svg?v=112903831141716543191696526749) no-repeat center center;
     width: 142px;
     height: 102px;
     background-color: #e0e3e8;
@@ -2014,7 +2014,7 @@ height: 100vh;
   border: none;
   background-color: transparent;
   color: #111;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .frm_search_cat select {
@@ -2165,7 +2165,7 @@ input.search_header__input:not([type=submit]):not([type=checkbox]) {
   color: #999;
   display:flex;
   font-size: 14px;
-  border-radius: 10px;
+  border-radius: 50px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -2197,7 +2197,7 @@ input.search_header__input:not([type=submit]):not([type=checkbox]) {
 }
 .header-search .search_header .frm_search_cat:after {
   content: "\e94f";
-  font-family: icon-dukamarket!important;
+  font-family: main-font!important;
   position: absolute;
   color: #333;
   font-size: 14px;
@@ -2240,7 +2240,7 @@ input.search_header__input:not([type=submit]):not([type=checkbox]) {
 }
 .header-search .search_header .search_header__submit:before{
 	content: "\e9ed";
-    font-family: icon-dukamarket,sans-serif;
+    font-family: main-font,sans-serif;
     font-size: 20px;
     color: #222;
 }

@@ -1,3 +1,18 @@
+/** Shopify CDN: Minification failed
+
+Line 16:0 Transforming class syntax to the configured target environment ("es5") is not supported yet
+Line 17:13 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 29:4 Transforming const to the configured target environment ("es5") is not supported yet
+Line 33:17 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 35:4 Transforming const to the configured target environment ("es5") is not supported yet
+Line 36:4 Transforming const to the configured target environment ("es5") is not supported yet
+Line 40:21 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 46:17 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+Line 47:4 Transforming const to the configured target environment ("es5") is not supported yet
+Line 51:20 Transforming object literal extensions to the configured target environment ("es5") is not supported yet
+... and 49 more hidden warnings
+
+**/
 class CollectionFiltersForm extends HTMLElement {
   constructor() {
     super();

@@ -842,7 +842,7 @@ align-items: center;
     color: var(--color-main);
 }
  .content-form .check-box input[type="checkbox"]:checked + label::before {
-	font-family: icon-dukamarket;
+	font-family: main-font;
     content: "\e94c";
 }
  .content-form .check-box .forgot {
@@ -1184,8 +1184,7 @@ align-items: center;
       text-transform: uppercase;
 }
  .shoppingcart-content .cart-content .shopping-cart-content .title div {
-	 padding:15px ;
-   padding-top: 0;
+	 margin-top: 20px;
 }
 
  .shoppingcart-content .cart-content .shopping-cart-content .each-item .delete-item {
@@ -1363,7 +1362,6 @@ align-items: center;
   }
   @media (max-width: 400px){
     .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td a {
-    	 padding: 8px;
       font-size: 10px;
     }
     .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td .right .submit{
@@ -1660,7 +1658,7 @@ align-items: center;
 	 display: inline-block;
 	 text-transform: uppercase;
 	 border: 0px;
-	 background: #111;
+	 background: #1e33af;
 	 width: 100%;
 	 color: #fff;
 	 text-align: center;
@@ -1818,7 +1816,7 @@ align-items: center;
  .mfp-close-btn-in .mfp-close::before {
 	 font-size: 20px;
 	 content: "\ea32";
-	 font-family: 'icon-dukamarket';
+	 font-family: 'main-font';
 }
  .cms-popup-newsletter .sub-title {
 	 font-size: 30px;
@@ -2340,7 +2338,6 @@ align-items: center;
 	 .shopping-cart-content .quantity-cart {
 		 float: none;
 		 display: inline-block;
-		 border: solid 1px #d7d7d7;
 	}
 	 .shopping-cart-content .group-quantity-button a {
 		 padding: 0 5px;
@@ -2369,7 +2366,7 @@ align-items: center;
 	 .shopping-cart-content .checkout-cart td .left {
 		 margin-bottom: 15px;
 		 float: none !important;
-		 display: block;
+		 display: flex;
 	}
 	 .shopping-cart-content .checkout-cart td .right {
 		 float: none !important;
@@ -3525,14 +3522,14 @@ content: "";
 }
 .slick-prev:before{
   content: "\e950";
-  font-family: 'icon-dukamarket';
+  font-family: 'main-font';
   font-size:20px;
   color: #1e33af;
   opacity: 1;
 }
 .slick-next:before{
   content: "\e951";
-  font-family: 'icon-dukamarket';
+  font-family: 'main-font';
   font-size:20px;
   color: #1e33af;
   opacity: 1;
@@ -3741,12 +3738,12 @@ content: "";
   }
   .page-faqs .nav-accordion li span.collapse:before{
     content:'\e94f';
-    font-family: icon-dukamarket;
+    font-family: main-font;
     font-size: 14px;
   }
   .page-faqs .nav-accordion li span.expand:before{
     content:'\e952';
-    font-family: icon-dukamarket;
+    font-family: main-font;
     font-size: 14px;
   }
   .page-faqs .nav-accordion ul{
@@ -4196,7 +4193,7 @@ content: "";
     border-radius: 3px;
     top: 0;
     cursor: pointer;
-    font-family: icon-dukamarket!important;
+    font-family: main-font!important;
     opacity:0.5
   }
   .box-menu-moible .menu-mobile .laber_mb_menu .menu-item:hover .collapse,
@@ -4244,7 +4241,8 @@ content: "";
     text-transform: none;
     font-size: 14px;
     font-weight: 400;
-    background: #fff;
+    border: 1px solid #e3e3e3;
+    background: #eee;
     padding: 0 20px;
     position: relative;
     border-radius: 30px;
@@ -4736,4 +4734,7 @@ content: "";
   .slick-next{
     visibility: hidden;
   }
+}
+.product-option {
+  display: inline-flex;
 }

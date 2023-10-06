@@ -10,12 +10,13 @@
         "shop_locale_code__ed": '{{ shop.locale }}' || 'en',
         "shop_domain__ed":  '{{ shop.permanent_domain }}',
         "product_available__ed": '{{ product.available }}',
+        "product_id__ed": '{{ product.id }}'
     });
     window.deliveryED = window.deliveryED || {};
     window.deliveryED.setting = {};
     Object.assign(window.deliveryED.setting, {
         "delivery__app_setting": {{ shop.metafields.delivery.main_setting | json }},
-        "delivery__pro_setting": {{ product.metafields.delivery.product_setting  | json }},
-        "delivery__cate_setting": {{ product.metafields.delivery.category_setting  | json }}
+        "delivery__pro_setting": {{ product.metafields.delivery.product_setting | json }},
+        "delivery__cate_setting": {{ product.metafields.delivery.category_setting | json }}
     });
 </script>

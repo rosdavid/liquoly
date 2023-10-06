@@ -34,32 +34,6 @@
       </a>
     </li>
 	{% endif %}
-    {%- if permaImage != blank -%}
-    	{% if settings.share_pinterest %}
-          <li class="pinterest">
-            <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_pinterest' | t }}" href="http://pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{{permaImage}}&amp;description={{ permaTitle }}" target="_blank" class="pinterest">
-              <span class="title">{{ 'general.social.share_on_pinterest' | t }}</span>
-              <i class="fa fa-pinterest"></i>
-            </a>
-          </li>
-    	{% endif %}
-    	{% if settings.share_tumblr %}
-          <li class="tumblr">
-            <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_tumblr' | t }}" data-content="http:{{permaImage}}" href="//tumblr.com/widgets/share/tool?canonicalUrl={{ permalinkURL }}" target="_blank" class="tumblr">
-              <span class="title">{{ 'general.social.share_on_tumblr' | t }}</span>
-              <i class="fa fa-tumblr"></i>
-            </a>
-          </li>
-    	{% endif %}
-    {%- endif -%}
-    {% if settings.share_telegram %}
-    <li class="telegram">
-      <a data-no-instant rel="nofollow" title="{{ 'general.social.share_on_telegram' | t }}" target="_blank" class="telegram " href="https://telegram.me/share/url?url={{ permalinkURL }}"> 
-        <span class="title">{{ 'general.social.share_on_telegram' | t }}</span>
-        <i class="fa fa-telegram"></i>
-      </a>
-    </li>
-    {% endif %}
     {% if settings.share_whatsapp %}
     <li class="whatsapp">
       <a data-no-instant rel="nofollow" title="{{ 'general.social.share_on_whatsapp' | t }}" target="_blank" class="whatsapp " href="https://wa.me/?text={{ permaTitle }}&#x20;{{ permalinkURL }}"> 

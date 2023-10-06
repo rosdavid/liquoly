@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+<!-- Canonical url custom logic injected by StoreSEO - Start -->
+
+    {%- if product.metafields.store_seo.cannonical_url.size > 2 -%}
+      {%- assign canonical_url = product.metafields.store_seo.cannonical_url -%}
+    {%- elsif page.metafields.store_seo.cannonical_url.size > 2 -%}
+      {%- assign canonical_url = page.metafields.store_seo.cannonical_url -%}
+    {%- elsif article.metafields.store_seo.cannonical_url.size > 2 -%}
+      {%- assign canonical_url = article.metafields.store_seo.cannonical_url -%}
+    {%- endif -%}
+    
+<!-- Canonical url custom logic injected by StoreSEO - End -->
+{% render 'spdn' %}
+ {%- render 'layouthub_header' -%}{% render 'thunder-injects' %}
+
+<!-- PROGRESSIFY-ME:START -->
+{% include 'progressify-me-snippet' %}
+<!-- PROGRESSIFY-ME:END -->
+
+  <!-- Google tag (gtag.js) -->
+
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-11051867104');
+  </script>
+  <meta charset="utf-8">   
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <meta name="theme-color" content="{{ settings.color_button }}">
+  <meta name="format-detection" content="telephone=no">
+  {%- if canonical_url != blank  -%}<link rel="canonical" href="{{ canonical_url }}">{%- endif -%}
+  <link rel="preconnect" href="//{{shop.domain}}" crossorigin>
+  <link rel="preconnect" href="//{{shop.permanent_domain}}" crossorigin>
+  <link rel="preconnect" href="//shopify.com" crossorigin>
+  {% capture seo_title %}
+    {{ page_title }}
+    {% if current_tags %}{%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}{% endif %}
+    {% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}
+    {% unless page_title contains shop.name %}&ndash; {{ shop.name }}{% endunless %}
+  {% endcapture %}
+  <title>{{ seo_title }}</title>
+  {%- if page_description %}<meta name="description" content="{{ page_description | escape }}">
+  {%- elsif collection.current_type or collection.current_vendor %}<meta name="description" content="{{ shop.description | default: shop.name | escape }}">{% endif -%}
+  {%- if settings.favicon != blank %}<link rel="shortcut icon" type="image/png" href="{{ settings.favicon | img_url: '32x' }}">{% endif -%}
+  {%- if settings.favicon_apple != blank %}<link rel="apple-touch-icon-precomposed" type="image/png" sizes="152x152" href="{{ settings.favicon_apple | img_url: '152x' }}">{% endif -%}
+  {% comment %}{% include 'social-meta-tags' %} {% endcomment %}
+  	
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+  {% include 'language-rtl' %}
+  {% include 'header-stylesheets' %}
+  {% include 'header-scripts' %}  
+  <script>
+    var theme = { moneyFormat: {{ shop.money_format | json }},moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }}}
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    const type_name = "{{request.page_type}}", t_cartCount = 1,t_shop_currency = "EUR", t_moneyFormat = "\u003cspan class='money'\u003e${{amount}}\u003c\/span\u003e", t_cart_url = "\/cart", pr_re_url = "\/recommendations\/products"; 
+     $(window).on('load', function () {
+          $("html:not('.no-js') .page-load").fadeOut("slow")
+     });    
+  </script>  
+  {{ content_for_header }}
+  {% render 'delivery_coder' %}
+  {% render 'judgeme_core' %} 
+ <img alt="icon" width="1400" height="1400" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 99vw; height: 99vh; max-width: 99vw; max-height: 99vh;"  src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+">
+<!-- Site verification meta injected by StoreSEO - Start -->
+<meta name="google-site-verification" content="t7docTKcdzlhiKrOS4N_UCUhxI1dKlw4TG9zv7oJRxA" />
+<!-- Site verification meta injected by StoreSEO - End -->
+
+<!-- Noindex, nofollow tag inserted by StoreSEO - Start -->
+
+    {%- if product -%}
+      {%- if product.metafields.store_seo.no_index == 1 and product.metafields.store_seo.no_follow == 1 -%}
+      	<meta name="robots" content="noindex, nofollow">
+      {%- elsif product.metafields.store_seo.no_index == 1 -%}
+      <meta name="robots" content="noindex">
+      {%- elsif product.metafields.store_seo.no_follow == 1 -%}
+      <meta name="robots" content="nofollow">
+      {%- endif -%}
+    {%- endif -%}
+    
+<!-- Noindex, nofollow tag inserted by StoreSEO - End -->
+
+<!-- Custom social media preview logic inserted by StoreSEO - Start -->
+
+    {%- if product.metafields.store_seo.facebook_preview_image_url.size > 2 -%}
+    <meta name="og:image" content="{{ product.metafields.store_seo.facebook_preview_image_url | default: page_image }}" />
+    {%- endif -%}
+
+    {%- if product.metafields.store_seo.twitter_preview_image_url.size > 2 -%}
+    <meta name="twitter:image" content="{{ product.metafields.store_seo.twitter_preview_image_url | default: page_image }}" />
+    {%- endif -%}
+
+    {%- if article.metafields.store_seo.facebook_preview_image_url.size > 2 -%}
+    <meta name="og:image" content="{{ article.metafields.store_seo.facebook_preview_image_url | default: page_image }}" />
+    {%- endif -%}
+
+    {%- if article.metafields.store_seo.twitter_preview_image_url.size > 2 -%}
+    <meta name="twitter:image" content="{{ article.metafields.store_seo.twitter_preview_image_url | default: page_image }}" />
+    {%- endif -%}
+
+    {%- if page.metafields.store_seo.facebook_preview_image_url.size > 2 -%}
+    <meta name="og:image" content="{{ page.metafields.store_seo.facebook_preview_image_url | default: page_image }}" />
+    {%- endif -%}
+
+    {%- if page.metafields.store_seo.twitter_preview_image_url.size > 2 -%}
+    <meta name="twitter:image" content="{{ page.metafields.store_seo.twitter_preview_image_url | default: page_image }}" />
+    {%- endif -%}
+    
+<!-- Custom social media preview logic inserted by StoreSEO - End -->
+</head>
+{%- assign admin_sp = request.design_mode -%}
+<body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first }} {% if template contains 'index' %} home {%else%} subpage {% endif %} {{ rtlClasses }}" data-header="{{settings.select_header}}">
+{% include 'agechecker' %}
+{%comment%}
+  	
+    <div class="page-load laberloading">
+      <div class="jloading">	
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+  	
+{%endcomment%}
+  {%if settings.show_load_page%}
+  <div class="page-load circle-loadding"><span></span></div>
+  {%endif%}
+  <div class="main">
+  {% include 'currencies' %}
+    <header id="lheader">
+      {% assign import_header = settings.select_header | plus: 0%}
+      {% case import_header %}     
+      {% when 1 %}
+        {% section 'top-header' %}
+        {% section 'header1' %}    	
+        {% section 'vertical_menu' %}	
+      {% when 2 %}
+        {%comment%}{% section 'top-header' %}{%endcomment%}
+        {% section 'header2' %}      
+      {% when 3 %}
+        {% section 'top-header' %}
+        {% section 'header3' %}
+      {% when 4 %}
+        {% section 'top-header' %}
+        {% section 'header4' %}  
+        {% section 'vertical_menu' %}	
+      {% when 5 %}
+        {% section 'top-header' %}
+        {% section 'header5' %} 
+        {% section 'vertical_menu' %}
+      {% endcase %}
+    </header>
+  <div class="page-container" id="PageContainer">
+    <main id="MainContent">
+      <!--LayoutHub-Workspace-Start-->{{ content_for_layout }}<!--LayoutHub-Workspace-End-->
+    </main>
+  </div>  
+  <div class="footer"> 
+    <!-- Start of Judge.me code -->
+      <div style='clear:both'></div>
+      <div style='text-align: center'>
+        <a class='jdgm-verified-count-badget' href='javascript:void(0)'>
+          {{ shop.metafields.judgeme.verified_badge }}
+        </a>
+      </div>
+      <!-- End of Judge.me code -->
+        {% assign import_footer= settings.select_footer | plus: 0%}
+        {% case import_footer %}     
+          {% when 1 %}     
+    		  {% section 'footer-top' %}	
+              {% section 'footer1' %}
+          {% when 2 %}	
+              {% section 'footer2' %}
+          {% when 3 %}
+              {% section 'footer3' %}
+          {% when 4 %}
+              {% section 'footer4' %}
+          {% when 5 %}
+              {% section 'footer5' %}
+        {% endcase %}
+    	{% if settings.show_button_rtl %}
+        <a class="switch-rtl-ltr" href="#">
+          <span class="rtl-text">{{ 'homepage.onboarding.rtl' | t }}</span>
+          <span class="ltr-text">{{ 'homepage.onboarding.ltr' | t }}</span>
+        </a>
+    	{% endif %}
+    </div>
+    
+    {% liquid 
+      assign type_name = request.page_type
+      
+  		  if  type_name=="product" or type_name == "index" or type_name == 'cart'
+          	section 'cross-sell-popup'  
+  		  endif 
+          if type_name == 'product' and settings.sticky_atc and product.available
+            section 'sticky_add_to_cart'
+          endif
+  		  if type_name != 'blog' and type_name !='article' and type_name !='page'
+          	section 'promotion-product-popup'  
+  		  endif
+           if type_name == "index"               
+              section 'promotion-newsletter-popup'
+          endif
+  		  include 'popups' 
+    %}   
+  </div>
+
+	{%- render 'flits_capture_code' with 'load_snippet',template:'flits_snippet' -%}
+
+
+
+
+{% render 'thunder-preload' %}
+{% include 'adroll' %}
+{%- render 'layouthub_footer' -%} 
+ 
+{% render 'spdn2' %}</body>
+</html>

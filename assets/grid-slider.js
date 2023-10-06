@@ -1,3 +1,15 @@
+/** Shopify CDN: Minification failed
+
+Line 34:29 Transforming default arguments to the configured target environment ("es5") is not supported yet
+Line 35:12 Transforming let to the configured target environment ("es5") is not supported yet
+Line 36:12 Transforming const to the configured target environment ("es5") is not supported yet
+Line 37:12 Transforming const to the configured target environment ("es5") is not supported yet
+Line 38:18 Transforming let to the configured target environment ("es5") is not supported yet
+Line 77:6 Transforming let to the configured target environment ("es5") is not supported yet
+Line 80:9 Transforming let to the configured target environment ("es5") is not supported yet
+Line 116:5 Transforming let to the configured target environment ("es5") is not supported yet
+
+**/
 /*
 * @Author: Alex Dong
 * @Date:   2020-07-29 13:21:07

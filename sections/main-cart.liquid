@@ -29,7 +29,7 @@
                   <td class="product-name" data-title="{{'cart.label.product'|t}}">
                     <div class="wrap_item_cart">
                       <a class="product-thumb img" href="{{ item.url }}" title="{{ item.product.title }}">
-                      	<img class="lazyload" data-src="{{ item | img_url: 'grande' }}" width="100" alt="{{item.title}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                      	<img class="lazyload" loading="lazy" data-src="{{ item | img_url: 'grande' }}" width="100" alt="{{item.title}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
                       </a>
                       <div class="wrap_title_cart">
                         {%comment%}<span>{{ item.product.collections[0].title }}</span>{%endcomment%}

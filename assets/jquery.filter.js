@@ -33,10 +33,10 @@ $(document).ready(function() {
          
           var cents = 0.0;
           var oldFormat = Currency.moneyFormats['EUR'][ Currency.format] || '';
-                                                var newFormat = Currency.moneyFormats[newCurrency][Currency.format] || '';
+          var newFormat = Currency.moneyFormats[newCurrency][Currency.format] || '';
 
-                                                if(type == 'format'){
-                                                  return  Currency.formatMoney(value, newFormat);
+          if(type == 'format'){
+          return  Currency.formatMoney(value, newFormat);
                                                 }
           if (oldFormat.indexOf('amount_no_decimals') !== -1) {
             cents = Currency.convert(parseInt(value, 10)*100, oldCurrency, newCurrency);
@@ -159,36 +159,36 @@ $(document).ready(function() {
         $("div[data-amount-price] [data-to]").html(max_pr);
       },
       change: function(event, ui) {
-        jQuery("body").addClass('ajax_loading'); /* Hiển thị loading khi filter ajax*/
+        jQuery("body").addClass('ajax_loading');
 	    $("div[data-top-content-filter]").removeClass("opened");
-        var vMaxPrice = ui.values[1]; /* Đọc max price từ thanh cuộn */
-        var vMinPrice = ui.values[0];  /* Đọc min price từ thanh cuộn */
+        var vMaxPrice = ui.values[1];
+        var vMinPrice = ui.values[0];
 
-        var vIndex = 0; /* Biến lưu chỉ số duyệt sản phẩm */
-        var vSumProduct   = 0; /* Biển lưu tổng số sản phẩm */
-        var vPage = 1; /* Biển lưu tổng số trang khi phân trang */
-        var vCount = 0; /* Biến đếm các sản phẩm thoả mãn điều kiện */              
+        var vIndex = 0;
+        var vSumProduct   = 0;
+        var vPage = 1;
+        var vCount = 0;        
 
-        var vHtml = ''; /* Khởi tạo biến html = rỗng để chuẩn bị cho việc append các sản phẩm vào khu vực kết quả */
-        var vView = $(".js_cat_view.active").data('col') > 0 ? 'grid' : 'list' ; /* Lấy view từ collection view có trạng thái active với data-col = 0 là list*/
-        var vcol = $("#productPerPage").val(); /* Lấy số lượng column */
-        var vHasProduct = false; /* Biến kiểm tra có sản phẩm thoả mãn điều kiện */
+        var vHtml = '';
+        var vView = $(".js_cat_view.active").data('col') > 0 ? 'grid' : 'list' ;
+        var vcol = $("#productPerPage").val();
+        var vHasProduct = false;
 			
-        $("#collection-product").empty(); /* Xoá các item trên khung kết quả */
-        $("div[data-container-cat]").addClass("js_product_ajax"); /* Thêm class để điều khiển phân trang */
-        $(".products-result-count").empty(); /* Xoá biến hiển thị số kết quả phân trang */
-        $(".js_paginate_ajax").empty(); /* Xoá dữ liệu phần tử hiển thị kết quả phân trang */
+        $("#collection-product").empty();
+        $("div[data-container-cat]").addClass("js_product_ajax");
+        $(".products-result-count").empty();
+        $(".js_paginate_ajax").empty();
         
-        if($('.js_cat_view.active').length <= 0){/* Nếu không tồn tại collection view thì gán view = grid */
+        if($('.js_cat_view.active').length <= 0){
           vView = 'grid';
         }
 
-        /*Duyệt các sản phẩm từ mảng danh sách collection thông qua json_collection_filter (biến này được truyền từ sections/collection.liquid ) */
+        
         $.each(json_collection_filter,function(paramIndex, paramElement) {
-          var current_price =  convert_currency(paramElement.variants[0].price,'');  /* Lấy giá hiện thời của từng sản phẩm */                	
-          current_price = get_price_only(current_price); /* Chỉ lấy số của giá */                 	
-          if (current_price <= vMaxPrice && current_price >= vMinPrice) {  /* Kiểm tra giá sản phẩm có thoả mãn điệu kiện lọc */
-            vHasProduct = true; /* Có sản phẩm thoả mãn điều kiện*/  
+          var current_price =  convert_currency(paramElement.variants[0].price,'');
+          current_price = get_price_only(current_price);
+          if (current_price <= vMaxPrice && current_price >= vMinPrice) {
+            vHasProduct = true;
             var xhr = null;
             var handle_collection = $("#currency_collection_handle").val();
             var url_cat = "/collections/"+handle_collection;            
@@ -222,10 +222,10 @@ $(document).ready(function() {
                       },500)
                     }
             })
-            vHtml = vHtml + json_to_html(paramElement,vView,paramIndex,vPage, vcol);  /* Gọi hàm để tạo giao diện html cho sản phẩm rồi thêm vào biến vHtml */
-            vSumProduct++; /* Tăng biến tổng sản phẩm khi tìm thấy sản phẩm thoả mãn điều kiện */                     
-            vCount++; /*Tăng biến đếm*/
-            vIndex++; /* Tăng chỉ số duyệt sản phẩm trong mảng sản phẩm */
+            vHtml = vHtml + json_to_html(paramElement,vView,paramIndex,vPage, vcol);
+            vSumProduct++;
+            vCount++;
+            vIndex++;
           }else{
             $("div[data-top-content-filter]").removeClass("opened");
           }                           
@@ -234,15 +234,15 @@ $(document).ready(function() {
        
         
         
-        if(! vHasProduct){ /* Nếu duyệt hết mảng sản phẩm mà không tìm được sản phẩm thoả mãn điều kiện */
+        if(! vHasProduct){
           vHtml +='<div class="shopify-info no-products"><i class="flash fa fa-exclamation-triangle" aria-hidden="true"></i>No hay productos que coincidan con su precio</div>';
         }          
-        $("#collection-product").append(vHtml);  /* Append giao diện kết quả sản phẩm vào khu vực kết quả lọc */     
+        $("#collection-product").append(vHtml);
         
         loadMoreProduct(limit_product, vIndex);
 		
         
-        if($('.shopify-product-reviews-badge').length > 0){/*Reinit lại app product review */
+        if($('.shopify-product-reviews-badge').length > 0){
           SPR.registerCallbacks();
           SPR.initRatingHandler();
           SPR.initDomEls();
@@ -259,7 +259,7 @@ $(document).ready(function() {
         }, 500)
        
         window.setTimeout(function() {
-          jQuery("body").removeClass('ajax_loading'); /* Sau khi đã hiển thị kết quả lọc thì đóng loading */
+          jQuery("body").removeClass('ajax_loading');
         }, 1000);
 
       } 
@@ -267,10 +267,10 @@ $(document).ready(function() {
     }); 
 
   }
-      initFilterPrice(); /* Khởi tạo hàm lọc với price */
+      initFilterPrice();
   
-      $(document).on('shopify:section:load', function(){    /* Khi section được load trong admin */
-        initFilterPrice(); /* Gọi lại hàm lọi với price*/
+      $(document).on('shopify:section:load', function(){
+        initFilterPrice();
       })
       
       jQuery(document).on('pjax:end', function (xhr, textStatus, options) { 

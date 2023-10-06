@@ -1,5 +1,3 @@
-<!-- Created by Andy 28/08/2017 -->
-
 <!-- /snippets/collection-sidebar.liquid -->
 
 
@@ -9,6 +7,7 @@
   {% if settings.enable_use_filter_category%}
       <div data-filter-ajax class="widget widget-categories">
         <h5 class="widgettitle">{{settings.filter_category_title}}</h5>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
         {% if linklists.sidebar-category.links.size > 0 %}
             {% assign index = 0 %}
             <ul data-list-categories class="list-categories">
@@ -51,6 +50,7 @@
   {% if settings.enable_use_filter_brand %}      
       <div data-filter-ajax class="widget widget-brand">
         <h5 class="widgettitle">{{settings.filter_brand_title}}</h5>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
         <ul class="list-categories">
           {% assign index = 0 %}
 
@@ -181,6 +181,7 @@
   {% if settings.enable_use_new_product %}
   <div class="widget widget-recent-post">
     <h5 class="widgettitle">{{settings.filter_title_new_product}}</h5>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
     <ul class="list-recent-posts">
       
       {% assign handle = settings.filter_collection_new_product %}

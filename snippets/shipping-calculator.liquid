@@ -12,7 +12,7 @@
       <select id="address_country" style="width: 100%;" name="address[country]" data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% elsif settings.shipping_calculator_default_country != '' %}{{ settings.shipping_calculator_default_country }}{% endif %}">{{ country_option_tags }}</select>
     </p>
     <p class="field form-row form-row-wide" id="address_province_container" style="display:none;">
-      {%comment%}<label for="address_province" id="address_province_label">Province</label>{%endcomment%}
+      {%comment%}<label for="address_province" id="address_province_label">Provincia</label>{%endcomment%}
       <select id="address_province" style="width: 100%;" name="address[province]" data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"></select>
     </p>  
     <p class="field form-row form-row-wide">

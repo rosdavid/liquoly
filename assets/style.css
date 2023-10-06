@@ -61,7 +61,7 @@
 }
 
 body{
-  font-family: Rubik;
+  font-family: Roboto;
   position: relative;
   font-size: 14px;
   overflow-x: hidden;
@@ -78,7 +78,7 @@ body * {
       overflow: hidden;
    }
   button{
-  	font-family: Rubik;
+  	font-family: Roboto;
   }
   @media screen and (-webkit-min-device-pixel-ratio:0) {
     input[type="email"]:hover,
@@ -111,42 +111,42 @@ body * {
   	margin-bottom: 10px;
 }
 h1,.h1{
-  font-family: ;
+  font-family: Roboto;
   font-size: 14px;
   font-weight:600;
   line-height: 1.1;
   letter-spacing: 0px;
 }
 h2,.h2{
-  font-family: ;
+  font-family: Roboto;
   font-size: 20px;
   font-weight:600;
   line-height: 1;
   letter-spacing: 0px;
 }
 h3,.h3{
-  font-family: ;
+  font-family: Roboto;
   font-size: 14px;
   font-weight:600;
   line-height: 1;
   letter-spacing: 0px;
 }
 h4,.h4{
-  font-family: ;
+  font-family: Roboto;
   font-size: 14px;
   font-weight:600;
   line-height: 1;
   letter-spacing: 0px;
 }
 h5,.h5{
-  font-family: ;
+  font-family: Roboto;
   font-size: 14px;
   font-weight:600;
   line-height: 1;
   letter-spacing: 0;
 }
 h6,.h6{
-  font-family: ;
+  font-family: Roboto;
   font-size: 14px;
   font-weight:600;
   line-height: 1;
@@ -352,14 +352,14 @@ label {font-weight:500;}
 	 -webkit-appearance: none;
 	 -ms-appearance: none;
 	 -o-appearance: none;
-   font-family: Rubik;
+   font-family: Roboto;
 }
  input {
 	 outline: 0;
 	 -webkit-box-shadow: none;
 	 box-shadow: none;
 	 border-radius: 0;
-   font-family: Rubik;
+   font-family: Roboto;
 }
 .text_center,
 .text-center{
@@ -774,7 +774,7 @@ align-items: center;
     color: var(--color-main);
 }
  .content-form .check-box input[type="checkbox"]:checked + label::before {
-	font-family: icon-dukamarket;
+	font-family: main-font;
     content: "\e94c";
 }
  .content-form .check-box .forgot {
@@ -1116,8 +1116,7 @@ align-items: center;
       text-transform: uppercase;
 }
  .shoppingcart-content .cart-content .shopping-cart-content .title div {
-	 padding:15px ;
-   padding-top: 0;
+	 margin-top: 20px;
 }
 
  .shoppingcart-content .cart-content .shopping-cart-content .each-item .delete-item {
@@ -1295,7 +1294,6 @@ align-items: center;
   }
   @media (max-width: 400px){
     .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td a {
-    	 padding: 8px;
       font-size: 10px;
     }
     .shoppingcart-content .cart-content .shopping-cart-content .checkout-cart td .right .submit{
@@ -1459,7 +1457,7 @@ align-items: center;
   }
   .shoppingcart-content .right .cart-total:before{
   	content:'';
-    background-image:url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/icon_2.png?v=17711283771312458661673045374);
+    background-image:url(//liquoly.com/cdn/shop/t/10/assets/icon_2.png?v=162132103097347785041696526750);
     position: absolute;
     top: 0;
     left: 0;
@@ -1469,7 +1467,7 @@ align-items: center;
   }
   .shoppingcart-content .right .cart-total:after{
   	content:'';
-    background-image:url(//cdn.shopify.com/s/files/1/0693/3459/7926/t/5/assets/icon_3.png?v=127338920598259301321673045374);
+    background-image:url(//liquoly.com/cdn/shop/t/10/assets/icon_3.png?v=42518544005242308981696526750);
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1592,7 +1590,7 @@ align-items: center;
 	 display: inline-block;
 	 text-transform: uppercase;
 	 border: 0px;
-	 background: #111;
+	 background: #1e33af;
 	 width: 100%;
 	 color: #fff;
 	 text-align: center;
@@ -1750,7 +1748,7 @@ align-items: center;
  .mfp-close-btn-in .mfp-close::before {
 	 font-size: 20px;
 	 content: "\ea32";
-	 font-family: 'icon-dukamarket';
+	 font-family: 'main-font';
 }
  .cms-popup-newsletter .sub-title {
 	 font-size: 30px;
@@ -2272,7 +2270,6 @@ align-items: center;
 	 .shopping-cart-content .quantity-cart {
 		 float: none;
 		 display: inline-block;
-		 border: solid 1px #d7d7d7;
 	}
 	 .shopping-cart-content .group-quantity-button a {
 		 padding: 0 5px;
@@ -2301,7 +2298,7 @@ align-items: center;
 	 .shopping-cart-content .checkout-cart td .left {
 		 margin-bottom: 15px;
 		 float: none !important;
-		 display: block;
+		 display: flex;
 	}
 	 .shopping-cart-content .checkout-cart td .right {
 		 float: none !important;
@@ -3457,14 +3454,14 @@ content: "";
 }
 .slick-prev:before{
   content: "\e950";
-  font-family: 'icon-dukamarket';
+  font-family: 'main-font';
   font-size:20px;
   color: #1e33af;
   opacity: 1;
 }
 .slick-next:before{
   content: "\e951";
-  font-family: 'icon-dukamarket';
+  font-family: 'main-font';
   font-size:20px;
   color: #1e33af;
   opacity: 1;
@@ -3673,12 +3670,12 @@ content: "";
   }
   .page-faqs .nav-accordion li span.collapse:before{
     content:'\e94f';
-    font-family: icon-dukamarket;
+    font-family: main-font;
     font-size: 14px;
   }
   .page-faqs .nav-accordion li span.expand:before{
     content:'\e952';
-    font-family: icon-dukamarket;
+    font-family: main-font;
     font-size: 14px;
   }
   .page-faqs .nav-accordion ul{
@@ -4128,7 +4125,7 @@ content: "";
     border-radius: 3px;
     top: 0;
     cursor: pointer;
-    font-family: icon-dukamarket!important;
+    font-family: main-font!important;
     opacity:0.5
   }
   .box-menu-moible .menu-mobile .laber_mb_menu .menu-item:hover .collapse,
@@ -4176,7 +4173,8 @@ content: "";
     text-transform: none;
     font-size: 14px;
     font-weight: 400;
-    background: #fff;
+    border: 1px solid #e3e3e3;
+    background: #eee;
     padding: 0 20px;
     position: relative;
     border-radius: 30px;
@@ -4668,4 +4666,7 @@ content: "";
   .slick-next{
     visibility: hidden;
   }
+}
+.product-option {
+  display: inline-flex;
 }
